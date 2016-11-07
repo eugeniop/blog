@@ -4,12 +4,6 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/)
+This is my personal technical blog. I'm Eugenio, and a problem solver. My background is in electrical engineering and computer science. I lead the Customer Success team at [Auth0](https://auth0.com), the company I founded with my brother in arms Matias Woloski. I love tinkering with many things: software, hardware, tools, houses, cars, bikes, wood, farms.
 
-You can find the source code for the Jekyll new theme at:
-{% include icon-github.html username="jekyll" %} /
-[minima](https://github.com/jekyll/minima)
-
-You can find the source code for Jekyll at
-{% include icon-github.html username="jekyll" %} /
-[jekyll](https://github.com/jekyll/jekyll)
+All opinions here are mine. Content, code, designs are posted here as is, with no warranties of any kind.
