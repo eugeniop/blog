@@ -5,7 +5,7 @@ date:   2016-11-09 13:37 -0800
 categories: alexa webtask 
 ---
 
-> This 2 series posts are largely based on a proof of concept project developed by my friend Pushp Abrol for a customer. Thanks Pushp!
+> These two posts are largely based on a proof of concept project developed by my friend [Pushp Abrol](https://twitter.com/pushpabrol) for a customer. Thanks Pushp for your guidance!
 
 Alexa is the voice service that powers the Amazon Echo device. It is surprisingly easy to work with as a developer.
 
@@ -159,9 +159,9 @@ Last step, I test that everything is correctly wired. Alexa provides a nice sand
 
 ![](/media/alexa-test.png)
 
-If all works well, you will see the same JSON object we defined in the API. And clicking on "Listen" will let you hear exactly what the Echo would respond to you.
+If all works well, you will see the same JSON object defined in the API. Clicking on "Listen" will let you hear exactly what an Echo device would respond to you.
 
-The object that Alexa POSTs to the API will be on the left pane:
+It is worth taking a look at the object that Alexa POSTs to the API (see the left pane), as we will need that later on:
 
 ```
 {
@@ -195,12 +195,13 @@ The object that Alexa POSTs to the API will be on the left pane:
 }
 ```
 
-For a full reference on custom skill JSON interface, see [here](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/alexa-skills-kit-interface-reference).
+> For a full reference on custom skill JSON interface, see [here](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/alexa-skills-kit-interface-reference).
 
-At this point everything is ready for a real test run. Just enable the skill in your mobile Alexa app.
+Everything is ready for a real test run. Just enable the skill in your mobile Alexa app and talk to your Echo.
 
 ## Security
 
-At this stage, there's no security (or a very weak one). We need to turn on security on the API level, and only accept requests from a trusted client. In this architecture, the client of the API is Alexa itself.
+There's **no** security whatsoever at this stage. In a real app, you will want requests to be accepted only from trusted clients. In this architecture, the client of the API is Alexa itself.
 
-Fortunately for me, Amazon designed Alexa in such a way, that 3rd party security is easily enabled. And that will be the main focus for Part II. 
+Fortunately for us, Amazon designed Alexa in such a way, that 3rd. party security is (surprisingly) easily enabled. And that will be the main focus for Part II. 
+
