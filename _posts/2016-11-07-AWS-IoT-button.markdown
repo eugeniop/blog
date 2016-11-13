@@ -168,6 +168,6 @@ In this configuration, I chose to use **RS256** as the signing algorithm for the
 
 > The Lambda function is currently requesting an `access_token` from Auth0 every time the button is activated. In a more realistic deployment (e.g. with a large number of buttons), you would likely cache the `access_token` between calls. But I only have one button for the time being...
 
-## Possible extensions
+## What's next?
 
 One natural extension I'd like to build is a simple SPA app (another WT) that will simply display the information captured.
