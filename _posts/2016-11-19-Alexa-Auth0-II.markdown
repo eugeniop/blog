@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Building Secure Alexa Skills - Part II"
-date:   2016-11-09 13:37 -0800
+date:   2016-11-19 5:36 -0800
 categories: alexa webtask auth0
 ---
 
