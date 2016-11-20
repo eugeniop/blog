@@ -205,24 +205,3 @@ Everything is ready for a real test run. Just enable the skill in your mobile Al
 There's **no** security whatsoever at this stage. In a real app, you will want requests to be accepted only from trusted clients. In this architecture, the client of the API is Alexa itself.
 
 Fortunately for us, Amazon designed Alexa in such a way, that 3rd. party security is (surprisingly) easily enabled. And that will be the main focus for Part II. 
-
-{% if page.comments %}
-
-<div id="disqus_thread"></div>
-<script>
-
-var disqus_config = function () {
-this.page.url = window.location.href;
-this.page.identifier = '{{page.title|slugify}}';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = '//eugeniop-technical-blog.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-{% endif %}

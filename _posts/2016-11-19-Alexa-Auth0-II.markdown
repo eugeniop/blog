@@ -191,24 +191,3 @@ Fortunately, there are [many libraries](http://jwt.io) that will assist with the
 > Notice that in other APIs, the `access_token` would be transmitted on the `Authorization` header. In Alexa, it is part of the request body. So standard `express` middlewares will not work.
 
 That's it!
-
-{% if page.comments %}
-
-<div id="disqus_thread"></div>
-<script>
-
-var disqus_config = function () {
-this.page.url = window.location.href;
-this.page.identifier = '{{page.title|slugify}}';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = '//eugeniop-technical-blog.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-{% endif %}
