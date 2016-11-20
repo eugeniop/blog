@@ -179,7 +179,7 @@ One natural extension I'd like to build is a simple SPA app (another WT) that wi
 <script>
 
 var disqus_config = function () {
-this.page.url = '{{page.url}}';
+this.page.url = window.location.href;
 this.page.identifier = '{{page.title|slugify}}';
 };
 

@@ -193,14 +193,16 @@ Fortunately, there are [many libraries](http://jwt.io) that will assist with the
 That's it!
 
 {% if page.comments %}
+
 <div id="disqus_thread"></div>
 <script>
+
 var disqus_config = function () {
-this.page.url = '{{ page.url }}';
-this.page.identifier = '{{ page.title | slugify }}';
+this.page.url = window.location.href;
+this.page.identifier = '{{page.title|slugify}}';
 };
 
-(function() {
+(function() { // DON'T EDIT BELOW THIS LINE
 var d = document, s = d.createElement('script');
 s.src = '//eugeniop-technical-blog.disqus.com/embed.js';
 s.setAttribute('data-timestamp', +new Date());
@@ -208,5 +210,5 @@ s.setAttribute('data-timestamp', +new Date());
 })();
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-                                
+
 {% endif %}
