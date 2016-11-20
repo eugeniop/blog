@@ -3,6 +3,7 @@ layout: post
 title:  "Welcome!"
 date:   2016-11-06 21:39:47 -0800
 categories: general
+comments: false
 ---
 
 Hi! Welcome to my tech blog. I'm usually working on multiple projects at the same time. This is the place I'm planning on using to publish about them. 
