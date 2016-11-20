@@ -3,6 +3,7 @@ layout: post
 title:  "Trying out AWS IoT Button"
 date:   2016-11-07 10:37 -0800
 categories: iot webtask 
+comments: true
 ---
 
 I've got 2 dash buttons, configured to order stuff for us at home. They work great.
@@ -173,14 +174,16 @@ In this configuration, I chose to use **RS256** as the signing algorithm for the
 One natural extension I'd like to build is a simple SPA app (another WT) that will simply display the information captured.
 
 {% if page.comments %}
+
 <div id="disqus_thread"></div>
 <script>
+
 var disqus_config = function () {
-this.page.url = '{{ page.url }}';
-this.page.identifier = '{{ page.title | slugify }}';
+this.page.url = '{{page.url}}';
+this.page.identifier = '{{page.title|slugify}}';
 };
 
-(function() {
+(function() { // DON'T EDIT BELOW THIS LINE
 var d = document, s = d.createElement('script');
 s.src = '//eugeniop-technical-blog.disqus.com/embed.js';
 s.setAttribute('data-timestamp', +new Date());
@@ -188,5 +191,5 @@ s.setAttribute('data-timestamp', +new Date());
 })();
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-                                
+
 {% endif %}
