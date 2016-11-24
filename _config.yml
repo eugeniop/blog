@@ -28,6 +28,8 @@ github_username:  eugeniop
 disqus:
   shortname: eugeniop-technical-blog
 
+google_analytics: UA-87967683-1
+
 # Build settings
 markdown: kramdown
 theme: minima
