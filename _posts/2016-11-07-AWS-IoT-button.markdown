@@ -3,6 +3,7 @@ layout: post
 title:  "Trying out AWS IoT Button"
 date:   2016-11-07 10:37 -0800
 categories: iot webtask 
+author: Eugenio Pace
 comments: true
 ---
 
