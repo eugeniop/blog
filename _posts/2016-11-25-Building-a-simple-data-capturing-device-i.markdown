@@ -2,7 +2,7 @@
 layout: post
 title:  "Building a simple data capturing device - Part I"
 date:   2016-11-26 15:20 -0800
-categories: mbed arm device iot lcd
+categories: mbed arm device iot lcd farm
 comments: true
 author: Eugenio Pace
 ---
@@ -28,7 +28,9 @@ So, naturally, I set out to build one.
 
 ## How are cows identified?
 
-Cows in the farm are identified both with an RFID (injected under the skin), and a visual numeric tag that is attached to their ears.
+Cows in the farm are identified both with an RFID (injected under the skin), and a visual numeric tag that is attached to their ears:
+
+![](/media/cow-tag.png)
 
 ## Basic hardware
 
