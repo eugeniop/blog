@@ -4,6 +4,7 @@ title:  "Building Secure Alexa Skills - Part II"
 date:   2016-11-19 5:36 -0800
 categories: alexa webtask auth0
 comments: true
+author: Eugenio Pace
 ---
 
 > These two posts are largely based on a proof of concept project developed by my friend [Pushp Abrol](https://twitter.com/pushpabrol) for a customer. Thanks Pushp for your guidance!
