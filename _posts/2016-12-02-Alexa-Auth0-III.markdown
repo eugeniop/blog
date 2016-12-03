@@ -52,9 +52,65 @@ The reason it didn't work is simple: a bug. Auth0 omitted the `expires_in` in th
 
 > `expires_in` is [technically RECOMMENDED](https://tools.ietf.org/html/rfc6749#section-4.2.2) not required. But it is required in Alexa. This of course is not super clear in the documentation.
 
-This has been fixed now and it works as expected. 
+A fix is now ready and the flow will work as expected once it is live sometime next week.
 
 > Reminder: `refresh_token` is sent by Auth0 when you add the `offline_access` scope to the authorization request.
+
+#### What to do in the meantime?
+
+There's a workaround you can try if you cannot wait until the fix is in production. You can proxy the token exchange request. And here comes [Webtask](https://webtask.io) for the rescue:
+
+The code would look like this:
+
+```js
+var Webtask = require('webtask-tools');
+var request = require('request');
+var app = new (require('express'))();
+
+app.post('/token', function(req, res) {
+  console.log(req.webtaskContext.data);
+  
+  var grant_type = req.webtaskContext.data.grant_type;
+  var client_id = req.webtaskContext.data.client_id;
+  var client_secret = req.webtaskContext.data.client_secret;
+  var redirect_uri = req.webtaskContext.data.redirect_uri;
+  
+  var options = { 
+                  method: 'POST',
+                  url: 'https://{YOUR AUTH0 ACCOUNT}.auth0.com/oauth/token',
+                  json: { 
+                     'grant_type': grant_type,
+                     'client_id': client_id,
+                     'client_secret': client_secret,
+                     'code': code,
+                     'redirect_uri': redirect_uri
+                  }
+                };
+
+  if(grant_type == 'authorization_code'){
+      options.json.code = req.webtaskContext.data.code;
+  } else {   
+    if(grant_type == 'refresh_token')
+    {
+      options.json.refresh_token=req.webtaskContext.data.refresh_token;
+    }
+  }
+
+  request(options, function(err, res, body) {
+    console.log('Error', err);
+    if(err) return res.sendStatus(500);
+    if(options.json.refresh_token){  
+      //Add the missing expires_in for refresh token flow
+      body.expires_in = 120;
+      res.json(body);
+    }
+  });
+});
+
+module.exports = Webtask.fromExpress(app);
+```
+
+Then in your Alexa configuration, you use the Webtask URL as the token exchange endpoint.
 
 ### Getting Test **access_tokens** for your API
 
