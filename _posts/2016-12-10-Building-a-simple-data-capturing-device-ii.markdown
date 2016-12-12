@@ -27,7 +27,7 @@ It is possible to download the toolchain, and develop offline, but I have not ha
 
 Just sign-up to [developer.mbed.org](https://developer.mbed.org) and jump into the compiler. It comes with integrated source control and easy access to libraries.
 
-> The standard C library is available for your projects. That's a great start if you are familiar with it.
+> The standard C library is available for your projects. That's a great start if you are familiar with it. Years and years of proven
 
 The online compiler is fast and will generate a downloadable binary. Since the **mbed** board mounts itself as a drive on the host computer, you can simply map it to the preferred browser downloads location. Then on each (successful) compile the new binary will be automatically installed on the board.
 
@@ -41,7 +41,7 @@ MBED ships with tons of libraries. For the most part, you've got pretty much eve
 
 The default language is C++, and it is hard. But not too bad. Fortunately, there are libraries for most of the components I need.
 
-> C++ is the kind of the _burpee_ of programming.
+> C++ is kind of the **burpee** of programming.
 
 ## Modeling the Peripherals
 
@@ -277,6 +277,6 @@ int main()
 
 ```
 
-Now I can easily check the basics are working.
+Now I can easily check the basics are working and get the instant satisfaction of seeing bytes go across a wire and on my screen.
 
-Next step: building a more robust way of developing the app and modules.
+Next step: clearly, I need a more robust way of developing the app and modules. Throwing `printf` here and there is ok, but I'd like a better harness.
