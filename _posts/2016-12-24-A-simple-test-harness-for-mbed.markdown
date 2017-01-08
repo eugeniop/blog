@@ -307,6 +307,6 @@ int FreeMem(void) {
 }
 ```
 
-I guess it is not super efficient, but it did help me find all leaks I had, so...go enough for me!
+I guess it is not super efficient, but it did help me find all leaks I had, so...good enough for me!
 
 > Note to self: `free` and `delete` are your friends. Same with `virtual destructors`.
