@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Using Webtask as an API gateway"
-date:   2017-01-01 12:46 -0800
-categories: express nodejs auth0 jwt webtask api
+date:   2017-01-1 16:33 -0800
+categories: express nodejs auth0 jwt webtask api passwordless
 comments: true
 author: Eugenio Pace
 ---
