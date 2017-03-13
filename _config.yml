@@ -16,14 +16,14 @@
 title: Eugenio Pace Technical Blog
 email: eugeniop@auth0.com
 description: > # this means to ignore newlines until "baseurl:"
-  Welcome to my techincal blog. I'm Eugenio. Engineer. Problem solver. Auth0 co-founder. Customer Success Primus Pilus.
+  Welcome to my technical blog. I'm Eugenio. Engineer. Problem solver. Auth0 co-founder. Customer Success Primus Pilus.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://eugeniopace.org" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: eugenio_pace
 github_username:  eugeniop
 
 # Uncomment for testing future posts locally
-# future: true
+future: true
 
 disqus:
   shortname: eugeniop-technical-blog
@@ -36,6 +36,11 @@ theme: minima
 gems:
   - jekyll-feed
   - jekyll-sitemap
+  - jekyll-mermaid
 exclude:
   - Gemfile
   - Gemfile.lock
+
+mermaid:
+  src: 'https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.min.js'
+
