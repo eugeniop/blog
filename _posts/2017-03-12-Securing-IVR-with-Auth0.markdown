@@ -238,22 +238,7 @@ The most complicated operation is a search against the Auth0 `/users` resource. 
 3. If we find the user, we then call another API in Auth0 to authenticate the user.
 4. Return the **"greeting"** to the IVR.
 
----
-
-{% mermaid %}
-sequenceDiagram
-  IVR->>WT API: validate('12345','4567')
-  WT API->>Auth0: Get Mgmt API Token
-  Auth0->> WT API: token
-  WT API->>Auth0: search('account:12345',token)
-  Note right of Auth0: Search against metadata for user with an account=12345
-  Auth0->>WT API: email: 'john@mail.com'
-  WT API->> Auth0: login('john@mail.com','4567')
-  Auth0->>WT API: id_token
-  WT API->>IVR: "john"
-{% endmermaid %}
-
----
+![](/media/ivr-sequence.png)
 
 And of course, this is trivial to do on WT, `express` and some `request` calls:
 
