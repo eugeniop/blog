@@ -281,7 +281,7 @@ app.post('/validate', function (req, res) {
       },
       //3. Login users with username/password
       (cb)=>{
-        loginUser(locals.user.email,pin,(err,login_result)=>{
+        loginUser(locals.users[0].email,pin,(err,login_result)=>{
           if(err) return cb(err);
           if(login_result.error) return cb(login_result.error);
           locals.login_result = login_result;
@@ -377,6 +377,13 @@ function searchUserByAccount(account,token,done){
 module.exports = Webtask.fromExpress(app);
 
 ```
+
+A few highlights of the WT:
+
+1. The WT API is registered in Auth0 as a `client` of the management API. That's why I'm using the `client credentials` flow to obtain a token. In Auth0, this `client` is defined to request `read:users` scope, which allows for searching.
+2. The `access_token` is cached using Webtasks `global` object as a simple optimization.
+3. This implementation takes a few shortcuts: very simplistic error handling, takes 1 result from search, etc.
+
 
 
 
