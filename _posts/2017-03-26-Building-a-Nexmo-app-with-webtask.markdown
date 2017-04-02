@@ -66,6 +66,10 @@ app.get('/', function (req, res) {
 module.exports = Webtask.fromExpress(app);
 ```
 
+And to prove it works (notice the `[Nexmo DEMO]` added to free accounts):
+
+![](/media/nexmo-demo.jpg)
+
 > The usual `caveat emptor`: you can tell my error handling up there is pretty basic. You'd want to add a more robust approach there. 
 
 Also, Nexmo publishes a [npm module for their APIs](https://www.npmjs.com/package/nexmo) that might be more convenient. Would strongly recommend looking at that if you are building a real app.
