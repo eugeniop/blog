@@ -26,7 +26,7 @@ GCE uses [OpenAPI](https://www.openapis.org/) to describe what and how your API 
 
 This is the easy part. Just open the **[Auth0 Dashboard, under APIs](https://manage.auth0.com/#/apis)** and define a new record:
 
-![](/media/gce-mange.png)
+![](/media/gce-manage.png)
 
 Keep the identifier handy, as you will need it in the next step (e.g. `http://google_api` in the screenshot above).
 
