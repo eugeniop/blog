@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Securing Google Cloud Endpoint API with Auth0"
+title:  "Securing a Google Cloud Endpoint API with Auth0"
 date:   2017-06-10 19:46 -0800
 categories: auth0 google endpoints jwt
 comments: true
