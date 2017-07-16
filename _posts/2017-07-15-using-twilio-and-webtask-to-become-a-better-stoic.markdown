@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Using Twilio and Auth0 Webtask to become a better stoic"
-date:   2017-06-10 19:46 -0800
+date:   2017-07-15 19:46 -0800
 categories: auth0 webtask twilio stoic
 comments: true
 author: Eugenio Pace
