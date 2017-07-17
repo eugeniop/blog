@@ -69,6 +69,7 @@ server.post('/sms', (req, res, next) => {
   
   if(actions[verb]){
       return actions[verb](MONGO_URL, req.body.From,(e,msg) => {
+      if(e) { msg = "Oops. Something went wrong."; }
       sendSMSResponse(res,msg);  
     });
   } else {
