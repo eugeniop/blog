@@ -450,11 +450,11 @@ As you can easily deduct from the code above, this implementation results on man
 
 One area to explore, and that I'm curious to learn more about, is how much of this can be pushed to mongo. Mongo does have a "pipeline" with complex operations: aggregation, map/reduce, etc. but I have not fully explored. Will be added to the "todo".
 
-I do intend to measure a little bit and find out though. `simple-statistics` looks lean and well implemented, but somewhat rigorous for mu humble needs.
+I do intend to measure a little bit and find out though. `simple-statistics` looks lean and well implemented, but somewhat rigorous for my humble needs.
 
 ### Generating HTML reports
 
-The trend report is simple HTML at the moment. I have not fully secured these pages, so I have disabled them. But I'm using a trick that [Tomek]() taught me. I'm storing the entire App/API/web app in a single Webtask, so the HTML templates are embedded and rendered using [ejs]():
+The trend report is simple HTML at the moment. I have not fully secured these pages, so I have disabled them. But I'm using a trick that [Tomek](https://tomasz.janczuk.org/) taught me. I'm storing the entire App/API/web app in a single Webtask, so the HTML templates are embedded and rendered using [ejs](https://github.com/tj/ejs):
 
 
 ```js
