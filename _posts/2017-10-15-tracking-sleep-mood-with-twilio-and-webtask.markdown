@@ -7,7 +7,7 @@ comments: true
 author: Eugenio Pace
 ---
 
-This is a small project I've been working on for a while to track sleep and mood. It is pretty obvious from our own personal experience how importnat sleep is. And that bad sleep patterns lead to a pretty poor general wellbeing and mood.
+This is a small project I've been working on for a while to track sleep and mood. It is pretty obvious from our own personal experience how important sleep is. And that bad sleep patterns lead to a pretty poor general wellbeing and mood.
 
 Building on the experience of creating the [Marcus Aurelius daily quote app I described on my previous post]({% post_url 2017-07-15-using-twilio-and-webtask-to-become-a-better-stoic %}), I decided to use SMS as the main interaction method. Why? because it is so simple:
 
