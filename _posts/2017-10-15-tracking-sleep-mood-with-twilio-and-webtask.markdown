@@ -390,24 +390,16 @@ function getSummary(mongo, phone, days, done) {
         var sleepAvgByDay={};
         
         _.forEach(sleepByDay, (s,k) => {
-          var avg = 0;
-          s.forEach(i => {
-            avg += i.hours;
-          });
+          var avg = ss.mean(_.map(s,(i)=>i.hours));
           sleepAvgByDay[k] = Math.round(avg * 100 / s.length) / 100
         });
 
         stats.sleep.sleepAvgByLocalTimeDay = _.map(daysWithBothSleepAndMood,(d)=>sleepAvgByDay[d]);
 
         var moodAvgByDay={};
-      
+  
         _.forEach(moodByDay, (s,k) => {
-          var avg = 0;
-          s.forEach(i => {
-            avg += i.mood;
-          });
-          var sample = {
-          };
+          var avg = ss.mean(_.map(s,(i)=>i.mood));
           moodAvgByDay[k] = Math.round(avg * 100 / s.length) / 100
         });
         
