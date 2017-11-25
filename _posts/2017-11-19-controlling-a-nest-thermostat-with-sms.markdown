@@ -7,7 +7,11 @@ comments: true
 author: Eugenio Pace
 ---
 
-This new application, shows how to control a NEST thermostat with SMS messages via Twilio. This app follows the same basic architecture I used before for SMS based apps:
+This new application, shows how to control a NEST thermostat with SMS messages via Twilio:
+
+![](/media/LWfoXSO9nc.gif)
+
+This app follows the same basic architecture I used before for SMS based apps:
 
 ![](https://docs.google.com/drawings/d/e/2PACX-1vRD8PiI0603gTmJK51EK_E7V5JidqhBktldMsID1Oc3ePi2igJ2biXgW3eiz91T06akwg3qheI-POjc/pub?w=869&h=378)
 
