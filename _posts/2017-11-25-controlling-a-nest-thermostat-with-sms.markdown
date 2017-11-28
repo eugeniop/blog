@@ -127,13 +127,13 @@ server.get('/', (req,res,next) => {
 
 ```
 
-Notice I'm simply redirecting the user to the Auth0 authroization endpoint, adding the `connection` property (`nest` in my example). The end result is that you will be redirected to NEST for authentication/authorization:
+Notice I'm simply redirecting the user to the Auth0 authroization endpoint, adding the `connection` property (`nest` in my example). The end result is that you will be redirected to NEST for authentication/authorization.
 
-![]()
-
-The `session` object stores a random 8 character string and is sent as part of the request. This is a pretty important part of the request, because it prevents CSRF attacks.
+The `session` object stores a random 8 character string and is sent as part of the request. This is a pretty important part of the request, because it prevents CSRF attacks. More below.
 
 Then the `/callback` just handles the regular **OAuth2 authorization code flow**:
+
+> Notice how it checks whether the `state` parameter returned in the query string is the same as the one sent int the original `/authorize` request. This prevents the `/callback` to be completed on transactions initiated by someone else.
 
 ```js
 server.get('/callback',(req,res,next)=>{
@@ -173,7 +173,13 @@ server.get('/callback',(req,res,next)=>{
 
 ### Associating phone with user
 
-Notice that if the token exchnage is successful, then we know the user has authenticated and authorized access to NEST API successfuly. 
+Notice that if the token exchnage is successful, then we know the user has authenticated and authorized access to NEST API successfuly. We signal this with the `user_id` attribute being stored in the user `session`.
+
+Also, I'm using `jwt.decode` and not `jwt.verify` because we trust the `id_token` returned by the Auth0 API. If we didn't, well...noting would work. `decode` is simpler than `verify` because it doesn't compute any signtures. I'm just interested in the `sub` claim (that equals the `user_id`).
+
+Doing this is equivalent to calling the `/userinfo` endpoint in Auth0 using the `access_token` returned in the token exchange. I'm saving one network call.
+
+> The `id_token` is returned if `scope=opeind` in the original request.
 
 As a final step, I display a simple form that captures the user phone number and requests confirmation from the same user. The phone is automatically populated based on the original subscription SMS (stored in session). 
 
@@ -182,8 +188,8 @@ As a final step, I display a simple form that captures the user phone number and
 If the user confirms the phone, then the system first validates that the user is authenticated and that a session exists:
 
 ```js
-server.post('/phone_subscription',(req,res,next)=>{
-  if(req.session && req.session.nest_sms && req.session.nest_sms.user_id && req.session.nest_sms.state === req.body.state){
+server.post('/phone_subscription',requiresAuth,(req,res,next)=>{
+  if(req.session.nest_sms.state === req.body.state){
   var locals = {};
   async.series([
       (cb)=>{
@@ -222,6 +228,18 @@ server.post('/phone_subscription',(req,res,next)=>{
   } 
 });
 ```
+
+This route is protected with a middleware (`requiresAuth`) that simply checks that the `user_id` is in a session.
+
+```js
+var requiresAuth = (req,res,next)=>{
+  if(req.session && req.session.nest_sms && req.session.nest_sms.user_id){ 
+    return next(); 
+  }
+
+  next(new Error('Please login with NEST first. Use the S command to subscribe.'));
+};
+``` 
 
 If the user is authenticated then:
 
@@ -334,5 +352,9 @@ Here're a few things I'd like to dig into:
 
 * NEST doesn't appear to offer `refresh_tokens` (couldn't find it in the docs). This means that eventually, calls to their API will fail as tokens get expired. In this case, you just subscribe again. But this is an area for further investigation.
 
-* I'd like to add a phone verification step. As it is today, it should be fine, but one extra verification step via a OTP would not hurt. 
+* I'd like to add a phone verification step. As it is today, it should be fine, but one extra verification step via a OTP would not hurt. This will likely be a followup version.
 
+### Update (Nov 27)
+
+* Fixed a few typos
+* Expanded on use of `id_token` in `/callback`

@@ -362,8 +362,7 @@ With this, I've got most of the software and hardware components ready, with the
 
 I'm not super worried about power. I'm sure I can assemble something with [Sparkfun](http://sparkfun.com) parts.
 
-The case on the other hand...I'm not keen on just 
-using a standard prototype case. They are horrible.
+The case on the other hand...I'm not keen on just using a standard prototype case. They are horrible.
 
 So my plan is to learn a little bit of 3D design and, naturally, make a case for a 3D printer.
 
