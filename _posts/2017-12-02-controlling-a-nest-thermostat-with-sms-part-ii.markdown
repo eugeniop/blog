@@ -7,7 +7,7 @@ comments: true
 author: Eugenio Pace
 ---
 
-This is a short followup excercises in my **SMS <-> NEST** integration: adding Phone verification. 
+This is a short followup excercise in my **SMS <-> NEST** integration: adding Phone verification. 
 
 The goal here is to instead of just accepting the user phone number and associating it with a user profile, I validate it first with a OTP.
 
