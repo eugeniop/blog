@@ -9,9 +9,9 @@ author: Eugenio Pace
 
 I have many little apps all implemented as [Webtasks](https://webtask.io). I've shown many of these in previous posts such as:
 
-1. [Controlling NEST thermostats & cameras]({% post_url 2017-01-01-Webtask-as-api-gateway %})
-2. [Sending SMS messages via twilio]({% post_url 2017-01-01-Webtask-as-api-gateway %})
-3. [Bulding Alexa's skills]({% post_url 2017-01-01-Webtask-as-api-gateway %})
+1. [Controlling NEST thermostats & cameras]({% post_url 2017-11-25-controlling-a-nest-thermostat-with-sms %})
+2. [Sending SMS messages via twilio]({% post_url 2017-07-15-using-twilio-and-webtask-to-become-a-better-stoic %})
+3. [Bulding Alexa's skills]({% post_url 2016-11-09-Alexa-Auth0 %})
 
 In some cases, a single app is made up of a couple of different Webtasks. Very often when there're many, it'd be a combination of an *interactive* and a *batch* one (the former being an [Express based WT](https://webtask.io/docs/editor/templates), the latter a simple [cron](https://webtask.io/docs/cron)).
 

@@ -228,6 +228,8 @@ server.get('/snapshots/:id',(req,res,next)=>{
 });
 ```
 
+> There's a header `data:image/jpeg;base64` that gets added at the beginning of the stream when you call `image.getBase64`. 
+
 That's it!
 
 
