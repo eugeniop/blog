@@ -16,7 +16,7 @@
 title: Eugenio Pace Technical Blog
 email: eugeniop@auth0.com
 description: > # this means to ignore newlines until "baseurl:"
-  Welcome to my technical blog. I'm Eugenio. Engineer. Problem solver. Auth0 co-founder. Customer Success Primus Pilus.
+  Welcome to my technical blog. I'm Eugenio. Engineer. Problem solver. Auth0 CEO and co-founder.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://eugeniopace.org" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: eugenio_pace
