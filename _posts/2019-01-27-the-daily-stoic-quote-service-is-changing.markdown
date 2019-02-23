@@ -78,6 +78,4 @@ I'm calling my apps "micro apps" for a reason. They are quite simple (although I
 
 2018 has been a very busy year for me, and I haven't had a chance to write about all the other micro-apps I've been working on. Planning on changing that in 2019.
 
-
-> Begin. To begin is half the work, let half still remain; again begin this, and you will have finished." —Marcus Aurelius
-
+> "Begin. To begin is half the work, let half still remain; again begin this, and you will have finished." —Marcus Aurelius
