@@ -31,6 +31,8 @@ Every box has a different button. The user simply presses the button after she t
 
 The button is programmed to execute a Lambda function (all buttons are wired to the same standard Lambda function), that then calls an API to record the event in a database.
 
+> I strongly recommend using the mobile (iPhone) AWS IoT app for registering new buttons. It makes the job way easier.
+
 A separate cronjob runs every morning, checks when the last event was recorded for each subscriber and sends a message. If it finds no check-in it will send a reminder: `Hey, you might have missed your pills`. If there is a recent check-in the message will switch to `Good job!`. 
 
 The high-level components look like this:
