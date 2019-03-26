@@ -7,7 +7,7 @@ comments: true
 author: Eugenio Pace
 ---
 
-The sun is becoming a more frequent companion here in the Pacific Northwest. Days are longer, warmer and nature is noting the change too. A great time of the year to take any of ferries in the Washington State Ferries fleet around Puget Sound. One of the cheapest cruises you can take. 
+The sun is becoming a more frequent companion here in the Pacific Northwest. Days are longer, warmer and nature is noting the change too. A great time of the year to take any of the ferries in the Washington State Ferries fleet around Puget Sound. One of the cheapest cruises you can take. 
 
 As I got lost in thoughts admiring the incredible beauty of Puget Sound and the Olympics while crossing from Seattle to Bainbridge Island, I casually googled for a "washington ferry API" and to my surprise, I found promising results:
 
@@ -145,6 +145,10 @@ domain.getTodaysSchedule = (from, to, done) => {
 The two parameters are mandatory and I am not checking that the departure and arrivals are an actual route. I leave that validation to the API. In that case, the `TerminalCombos` property will be empty.
 
 If the route between the two destinations is valid, then the `TerminalCombos` property will contain an array of `Times`. I'm using the `lodash.map` function to clean it up, and parse the date-times (with `momentjs`).
+
+## How it looks like
+
+![](https://docs.google.com/drawings/d/e/2PACX-1vRupCIRJsTzzhW_vEzObwtj5HiRlhjDDVRkX0edJuDfDByAxfIlIyhwAJxvDzzW8thiylI1CcHi6942/pub?w=402&h=687)
 
 
 ### Future developments
