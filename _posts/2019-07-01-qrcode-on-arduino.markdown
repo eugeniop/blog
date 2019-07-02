@@ -148,5 +148,5 @@ void PrintQRCode(const char * url){
 
 The end result is a neat QRCode:
 
-![](/media/qrcode.png)
+![](/media/qrcode_matrix.png)
 
