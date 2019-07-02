@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "First incursions into Computer Vision"
-date:   2019-07-01 01:05 -0800
+date:   2019-07-15 01:05 -0800
 categories: opencv computervision deadlifts
 comments: true
 author: Eugenio Pace
