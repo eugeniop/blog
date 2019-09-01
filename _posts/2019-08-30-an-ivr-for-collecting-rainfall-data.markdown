@@ -7,17 +7,17 @@ comments: true
 author: Eugenio Pace
 ---
 
-I put together a small app for collecting rainfall information. It is importnant to get precise rainfall information in specific locations of our family farm, and the one practical way I found is to just allow people working in the fields to report it back viua their phones. 
+I put together a small app for collecting rainfall information. It is essential to get precise rainfall information in specific locations of our family farm, and the one practical way I found is just to allow people working in the fields to report it back via their phones. 
 
 Until recently this was just a phone call to someone that took note or got the voice mail, but that meant transcribing the information, errors, etc.
 
-> Weather reports don't have the precision and accuracy we needed. Rainfall can vary enormously in differetn field only a few kilometers away from each other.
+> Weather reports don't have the precision and accuracy we needed. Rainfall can vary enormously in a different field only a few kilometers away from each other.
 
 ### An IVR!
 
-We thought about deploying automated weather stations, but some of the areas to cover are remote, with no power, and not great connectivity (and even more complicated maintenance, since I live 10,000 km away :-) ).
+We thought about deploying automated weather stations, but some of the areas to cover are remote, with no power, and not excellent connectivity (and even more complicated maintenance, since I live 10,000 km away :-) ).
 
-The simplest solution I came up with is simply an IVR (Interactive Voice Response). People working in the fields have all a cell-phone. Why not have them simply call a number to enter the rainfall? (which is very close to what they are used to doing anyway)
+The simplest solution I came up with is simply an IVR (Interactive Voice Response). People working in the fields have all a cell-phone. Why not have them call a number to enter the rainfall? (which is very close to what they are used to doing anyway)
 
 ```
 Welcome to rainfall collector. Please select the location to enter rainfall for: 1 for location A, 2 for B, 3 for C, 4 for D
@@ -33,15 +33,15 @@ Press 1 to confirm X mm of rainfall. 2 to cancel
 
 ### Architecture
 
-The front end of the app is of course Twilio, which does all the voice interfacing.
+The front end of the app is, of course, Twilio, which does all the voice interfacing.
 
 The backend is a little Express app that handles requests sent by Twilio and records info in a database eventually.
 
 ![]()
 
-Twilio publishes a [nodejs SDK](), including a module you can `require` in your app that takes care of the messages exchanged back and forth.
+Twilio publishes a [nodejs SDK](https://www.twilio.com/docs/libraries/node), including a module you can `require` in your app that takes care of the messages exchanged back and forth.
 
-> The nodejs SDK simplifies the creation of the messages Twilio expects: `TwiML`. These are just XML messages that encode instructions for their engine to do something for you: gather input from the user, say something, etc. I guess you could craft these by yourself, but the SDK makes it super easy. And besides, who wants to craft XML messages these days...
+> The nodejs SDK simplifies the creation of the messages Twilio expects: [TwiML](https://www.twilio.com/docs/voice/twiml). These are just XML messages that encode instructions for their engine to do something for you: gather input from the user, say something, etc. I guess you could craft these by yourself, but the SDK makes it super easy. And besides, who wants to craft XML messages these days...
 
 ### Scaffold of a simple app
 
@@ -129,13 +129,13 @@ function menu(m, prompt, menuRoute, routeParams, req, res){
 }
 ```
 
-There are also a few functions that I added to the `req` and `res` objects: `isResponse`, `menu`, `sendVoice`. These are added by the `ivr` middleware and I'll come back later to them.
+There are also a few functions that I added to the `req` and `res` objects: `isResponse`, `menu`, `sendVoice`. The `ivr` middleware adds these. I'll come back later to them.
 
 In a nutshell, `menu`:
 
-1. Checks if the request is a response from the user, or the very first interaction.
-2. If it is *not* a response, or if we find no handler for the input of the user, then we simply return to the `menuRoute` (essentially repeats whatever was prompted).
-3. It it finds a handler (by the presence of `Digits` in the body), it calls it.
+1. Checks if the request is a response from the user or the very first interaction.
+2. If it is *not* a response, or if we find no handler for the input of the user, then we return to the `menuRoute` (essentially repeats whatever was prompted).
+3. If it finds a handler (by the presence of `Digits` in the body), it calls it.
 
 In the example above, if the user presses `1`, the `req.body.Digits` property will be `1`. The handler for `1` will be:
 
@@ -172,10 +172,10 @@ const rainfall = (req, res) => {
 
 > Notice that the handler is wired both to a `GET` and a `POST`. the `GET` will mostly happen on redirect the first time the user lands here.
 
-Here the handler can deal with 3 situations:
+Here the handler can deal with three situations:
 
-1. The very first time it is called. In this case I call `req.gather` (we'll see what `gather` does later)
-2. It is the final confirmation of the input (2nd `if`). In that case we store the value of the captured value.
+1. The very first time it is called. In this case, I call `req.gather` (we'll see what `gather` does later)
+2. It is the final confirmation of the input (2nd `if`). In that case, we store the value of the captured value.
 3. It is the actual response with the `mm`, then we ask for confirmation.
 
 ### Extension methods
@@ -331,4 +331,5 @@ exports.middleware = function(options){
 
 The middleware makes the main app quite compact. I like that as I plan to add other functions to the menu later on for other collection activities.
 
-> Also, notice that the middleware returns *an array* of functions. The first one is Twilio's own method signature that ensures all requests come from your account.
+> Also, notice that the middleware returns *an array* of functions. The first one is Twilio's method signature that ensures all requests come from your account.
+
