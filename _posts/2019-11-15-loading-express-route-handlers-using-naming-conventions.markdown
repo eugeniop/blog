@@ -101,6 +101,6 @@ Et voilá!
 
 Now all I need to do is create a folder, drop an `index.js` file with the structure and worry about the routes. Everything else just works. And all is neatly contained in each folder.
 
-> I'm not sure if there are more _modejs kosher_ ways of achieving the same, but this works for me! If you have other ideas, let me know.
+> I'm not sure if there are more _nodejs kosher_ ways of achieving the same, but this works for me! If you have other ideas, let me know.
 
 

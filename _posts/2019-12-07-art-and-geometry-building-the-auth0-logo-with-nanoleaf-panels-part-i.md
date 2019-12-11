@@ -35,11 +35,15 @@ We need to find the angle β that will make the base 54° (from 60°).
 
 From above:
 
-![](https://latex.codecogs.com/svg.latex?\inline&space;\large&space;\cos(\beta)&space;=&space;h&space;/&space;L&space;,&space;\tan(54)&space;=&space;2h&space;/&space;L,&space;\cos(\beta)&space;=&space;\tan(54)/2,&space;\beta&space;=&space;\arccos(tan(54)/2))
+<!-- cos(\beta)=h/L{}' ; \tan(54) = 2h/L; L{}'=L\sqrt{3}/2;  \tan(54) = \sqrt{3}\cos(\beta); \beta = \arccos (\tan(54)/\sqrt{3})) -->
+
+<!-- <a href="https://www.codecogs.com/eqnedit.php?latex=cos(\beta)=h/L{}'&space;;&space;\tan(54)&space;=&space;2h/L;&space;L{}'=L\sqrt{3}/2;&space;\tan(54)&space;=&space;\sqrt{3}\cos(\beta);&space;\beta&space;=&space;\arccos&space;(\tan(54)/\sqrt{3}))" target="_blank"><img src="https://latex.codecogs.com/svg.latex?cos(\beta)=h/L{}'&space;;&space;\tan(54)&space;=&space;2h/L;&space;L{}'=L\sqrt{3}/2;&space;\tan(54)&space;=&space;\sqrt{3}\cos(\beta);&space;\beta&space;=&space;\arccos&space;(\tan(54)/\sqrt{3}))" title="cos(\beta)=h/L{}' ; \tan(54) = 2h/L; L{}'=L\sqrt{3}/2; \tan(54) = \sqrt{3}\cos(\beta); \beta = \arccos (\tan(54)/\sqrt{3}))" /></a> -->
+
+![](https://latex.codecogs.com/svg.latex?cos(\beta)=h/L{}'&space;;&space;\tan(54)&space;=&space;2h/L;&space;L{}'=L\sqrt{3}/2;&space;\tan(54)&space;=&space;\sqrt{3}\cos(\beta);&space;\beta&space;=&space;\arccos&space;(\tan(54)/\sqrt{3}))
 
 Which then yields:
 
-![](https://latex.codecogs.com/svg.latex?\inline&space;\large&space;\beta&space;=&space;46.5)
+![](https://latex.codecogs.com/svg.latex?\inline&space;\large&space;\beta&space;=&space;37.37)
 
 ### A prototype
 
@@ -54,6 +58,8 @@ Now I need to design the support structure for the Nanoleafs, and figure out how
 ### Credits
 
 The math formulas are rendered with [Codecogs](https://www.codecogs.com/latex/eqneditor.php)
+
+<a href="http://www.codecogs.com" target="_blank"><img src="http://www.codecogs.com/images/poweredbycodecogs.png" border="0" title="CodeCogs - An Open Source Scientific Library" alt="CodeCogs - An Open Source Scientific Library"></a>
 
 
 
