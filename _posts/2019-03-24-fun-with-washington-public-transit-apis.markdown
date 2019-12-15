@@ -54,29 +54,33 @@ The second endpoint provides a very convenient list of all scheduled departures 
 One annoying thing of the APIs is that dates are serialized in an old Microsoft proprietary format:
 
 ```js
-... 
-
-Times:
-   [ { DepartingTime: '/Date(1553402700000-0700)/',
+{
+  /* A bunch of other stuff here ... */
+Times:[ 
+      { 
+       DepartingTime: '/Date(1553402700000-0700)/',
        ArrivingTime: null,
        LoadingRule: 3,
        VesselID: 37,
        VesselName: 'Wenatchee',
        Routes: [...],
-       AnnotationIndexes: [] },
-     { DepartingTime: '/Date(1553405400000-0700)/',
+       AnnotationIndexes: [] 
+      },
+      {
+       DepartingTime: '/Date(1553405400000-0700)/',
        ArrivingTime: null,
        LoadingRule: 3,
        VesselID: 36,
        VesselName: 'Walla Walla',
        Routes: [...],
-       AnnotationIndexes: [] }
+       AnnotationIndexes: [] 
+      }
     ]
- ...
+  /* Another bunch of stuff here too... */
 }
 ```
 
-I spent (thankfully a short) time trying to parse it manually (searching for "/Date(" and "-" and )/"), until I casually checked with the always awesome [momentjs](https://momentjs.com/) library and [it does all the work already!](https://momentjs.com/docs/#/parsing/asp-net-json-date/). I am already using the library extensively so I did not bother. How awesome is that. Thanks, `momentjs`!
+I spent (thankfully a short) time trying to parse it manually (e.g. searching for "/Date(" and "-" and )/"), until I casually checked with the always awesome [momentjs](https://momentjs.com/) library and [it does all the work already!](https://momentjs.com/docs/#/parsing/asp-net-json-date/). I am already using the library extensively so I did not bother. How awesome is that. Thanks, `momentjs`!
 
 ### The app
 

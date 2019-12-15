@@ -27,7 +27,7 @@ The problem is that each triangle for the paralelogram we need is **not** equila
 
 ### Enter 3D!
 
-If you don't limit yourself to a plane, you can turn the triangle into the shape we need:
+If you don't limit yourself to a plane, you can turn the equilateral triangle into the shape we need through projection:
 
 ![](https://docs.google.com/drawings/d/e/2PACX-1vQAL0ijdNO27_G6YlcRDc61O8CFQbghojzm0zF_WBaqNNWbyU_eSKQQPo4MDKCldiCeC9J86sL2QsrX/pub?w=582&h=300)
 
@@ -60,9 +60,4 @@ Now I need to design the support structure for the Nanoleafs, and figure out how
 The math formulas are rendered with [Codecogs](https://www.codecogs.com/latex/eqneditor.php)
 
 <a href="http://www.codecogs.com" target="_blank"><img src="http://www.codecogs.com/images/poweredbycodecogs.png" border="0" title="CodeCogs - An Open Source Scientific Library" alt="CodeCogs - An Open Source Scientific Library"></a>
-
-
-
-
-
 
