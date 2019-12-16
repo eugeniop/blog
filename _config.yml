@@ -25,6 +25,8 @@ github_username:  eugeniop
 # Uncomment for testing future posts locally
 future: false
 
+show_excerpts: true
+
 disqus:
   shortname: eugeniop-technical-blog
 
