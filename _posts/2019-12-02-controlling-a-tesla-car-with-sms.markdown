@@ -291,6 +291,9 @@ Notice that there are *2 instances of the auth0 module* in use:
 
 And the latter needs a different `access_token`. One that has the right scopes for these operations: `read:users` and `update:users`. We need to **search** and then **update**.
 
+> By default, the Enrollment API returns an obfuscated phone number. There's a feature flag to enable the phone to be returned: `disable_management_api_sms_obfuscation`. See [here](https://auth0.com/docs/api/management/v2#!/Tenants/patch_settings)
+
+
 ### Processing commands
 
 Now that we've got all the pieces in place, and the user is bootstrapped, we can send commands via SMS.
