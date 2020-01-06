@@ -4,6 +4,7 @@ title: "Art and geometry - Building the Auth0 Logo with Nanoleaf Panels - Part I
 date:   2019-12-24 12:42-0800
 categories: geometry auth0 nanoleaf
 comments: true
+hidden: true
 author: Eugenio Pace
 ---
 
