@@ -1,9 +1,8 @@
 ---
 layout: post
 title: "Controling a Tesla car with SMS"
-date:   2020-01-01 12:01 -0800
+date:   2020-03-14 12:01 -0800
 categories: tesla nodejs
-hidden: true
 comments: true
 author: Eugenio Pace
 ---
