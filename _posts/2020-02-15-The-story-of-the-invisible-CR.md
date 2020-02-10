@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "The story of the invisible CR"
-date:   2020-02-01 13:23 -0800
+date:   2020-02-1 13:23 -0800
 categories: arduino epaper eink stoicism cli
 comments: true
 author: Eugenio Pace
