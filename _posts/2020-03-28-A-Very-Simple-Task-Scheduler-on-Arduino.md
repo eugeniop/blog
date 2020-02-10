@@ -108,6 +108,7 @@ public:
   }
 
   void updateActionTicks(int actionIndex, int _ticks){
+    //Ignore updates out of range
     if(actionIndex >= 0 && actionIndex < actions.len ){ 
       actions.ticks[actionIndex] = _ticks;   
     }
@@ -157,3 +158,11 @@ dispatcher.add("Save Stats", actions.saveStatsAction, 120);     // Every 120
 dispatcher.add("Synch Clock", actions.synchClockAction, 1440);  // Once a day for a 1 min / tick frequency
 dispatcher.add("Send Stats", actions.sendStatsAction, 480);     // Every 8 hours
 ```
+
+## Features and limitations
+
+Notice that this scheduler has no notion of precise time. All `actions` run sequentially one after the other. Some might take longer than others. And because they all run in the `main thread` (if we can call it that way), you are free to use any time limiting/manipulation function (e.g. `delay` or `millis`). The end result is that it is possible that some functions will not run *exactly* at the time you scheduled them. This is more of a cooperative scheduler. And needless to say, if an `action` never returns, then nothing else will run! This is totally fine for this design where precision timing is not required (and `ticks` are measured in *minutes* which is almost eternal time for a microprocessor).
+
+> An application like mine doesn't really require the sophistication of an _OS like_ task scheduler.
+
+
