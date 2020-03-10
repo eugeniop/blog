@@ -35,5 +35,5 @@ I love it!
 
 ### Future
 
-Nanoleafs can be _programmed_ and it ships with multiple integrations. One of them is with [IFTTT](https://ifttt.com/), which opens the door to innumerable options. Stay tuned!
+Nanoleafs can be _programmed_ and it ships with multiple integrations. One of them is with [IFTTT](https://ifttt.com/), which opens the door to innumerable options. There's also a (beta) [API](https://forum.nanoleaf.me/docs/openapi). Stay tuned!
 
