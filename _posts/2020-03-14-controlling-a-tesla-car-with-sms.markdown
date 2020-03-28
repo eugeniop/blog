@@ -4,10 +4,11 @@ title: "Controling a Tesla car with SMS"
 date:   2020-03-14 12:01 -0800
 categories: tesla nodejs
 comments: true
+hidden: true
 author: Eugenio Pace
 ---
 
-Someone I know got a Tesla, an amazing car. I can't think of anything geekier. What can be geekier than a car that ships with auto-updates and ... an API! (albeit unofficial, more below).
+Someone I know got a Tesla some time ago, an amazing car. I can't think of anything geekier. What can be geekier than a car that ships with auto-updates and ... an API! (albeit unofficial, more below).
 
 So naturally, this became a nice weekend project. I wanted to write a little SMS app that could send commands to the car. For example:
 

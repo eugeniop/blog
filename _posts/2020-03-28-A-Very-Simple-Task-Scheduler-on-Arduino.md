@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "A Very Simple Task Scheduler on Arduino"
-date:   2020-03-28 17:50 -0800
+date:   2020-03-28 10:50 -0800
 categories: arduino
 comments: true
 author: Eugenio Pace
@@ -137,8 +137,8 @@ ACTIONS Dispatcher::actions;
 
 The data structure `ACTIONS` keeps a list of:
 
-1. A name
-2. A pointer to a handler (the `action`)
+1. Names
+2. Pointers to handlers (the `action`)
 3. The number of `ticks` at which the `action` will be called
 4. A counter for the current `ticks`
 
@@ -164,5 +164,7 @@ dispatcher.add("Send Stats", actions.sendStatsAction, 480);     // Every 8 hours
 Notice that this scheduler has no notion of precise time. All `actions` run sequentially one after the other. Some might take longer than others. And because they all run in the `main thread` (if we can call it that way), you are free to use any time limiting/manipulation function (e.g. `delay` or `millis`). The end result is that it is possible that some functions will not run *exactly* at the time you scheduled them. This is more of a cooperative scheduler. And needless to say, if an `action` never returns, then nothing else will run! This is totally fine for this design where precision timing is not required (and `ticks` are measured in *minutes* which is almost eternal time for a microprocessor).
 
 > An application like mine doesn't really require the sophistication of an _OS like_ task scheduler.
+
+Also, notice the use of _fixed_ arrays (e.g. `MAX_ACTIONS`). In this project, there's a well known list of actions, and there's no need for any dynamic allocation. In small systems like this, with contrained memory, I like keeping things as bare bones as possible.
 
 
