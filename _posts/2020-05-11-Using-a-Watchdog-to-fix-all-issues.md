@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Using a Watchdog to fix all issues"
-date:   2020-04-11 7:30 -0800
+date:   2020-05-11 7:30 -0800
 categories: arduino resiliency
 comments: true
 author: Eugenio Pace
@@ -9,30 +9,29 @@ author: Eugenio Pace
 
 My little [project]({% post_url 2020-01-18-A-Display-of-Stoic-Quotes-using-Arduino-and-e-Paper-Display %}) has become quite sophisticated now. I managed to code enough to fill 82% of Arduino's total program memory!
 
-One of the latest additions was telemetry. I'm using the board's WiFi capabilities to send back home a summary of statistics, error conditions and various other metrics.
+One of the latest additions was telemetry. I'm using the board's WiFi capabilities to send back home a summary of statistics, error conditions, and various other metrics.
 
 Now that I have a [scheduler]({% post_url 2020-03-28-A-Very-Simple-Task-Scheduler-on-Arduino %}) this is easy to do. There's no requirement to send anything in real-time, so I can have this happen every few hours.
 
-I might cover the details of the networking stack in a later post, although there's nothing particularly special about it. Just a simple HTTPs call to an API secured by [Auth0](https://auth0.com).
+I might cover the details of the networking stack in a later post, although there's nothing special about it—just a simple HTTPs call to an API secured by [Auth0](https://auth0.com).
 
 > I've already covered the mechanics of authentication [here]( post_url 2019-04-14-calling-secure-apis-from-arduino-part-i %}) and [here]({ post_url 2019-04-14-calling-secure-apis-from-arduino-part-ii %}). 
 
-It all works great, but sometimes (very rarely), the board hangs. I spent a few cycles and couldn't find anything obvious. It all works fine when I look into it. I suspect a memory issue. The payloads for token exchange can sometimes get large (around 1.5KB in some cases), and even though I've been careful to use singletons, added error control and use memory very carefully, every once in a while something goes wrong and I need to reset the board, which of course is not very convenient for long term operations and resiliency.
+It all works great, but sometimes (very rarely), the board hangs. I spent a few cycles and couldn't find anything obvious. It all works fine when I look into it. I suspect a memory issue. The payloads for token exchange can sometimes get large (around 1.5KB in some cases), and even though I've been careful to use singletons, added error control and use memory very carefully, every once in a while something goes wrong, and I need to reset the board, which of course is not very convenient for long term operations and resiliency.
 
 ## The Watchdog timer
 
-Most uControllers used in embedded systems include a [Watchdog timer (WDT)](https://en.wikipedia.org/wiki/Watchdog_timer) and the [Atmel SAMD21](https://www.microchip.com/wwwproducts/en/ATsamd21g18) is no exception. A Watchdog timer is essentially an independent timing subsystem that needs to be reset constantly. If, for whatever reason, the system fails to reset the timer it will automatically restart the controller (or put it in a safe mode).
+Most uControllers used in embedded systems include a [Watchdog timer (WDT)](https://en.wikipedia.org/wiki/Watchdog_timer), and the [Atmel SAMD21](https://www.microchip.com/wwwproducts/en/ATsamd21g18) is no exception. A Watchdog timer is essentially an independent timing subsystem that needs to be reset always. If the system fails to reset the timer for whatever reason, it will automatically restart the controller (or put it in a safe mode).
 
-> 99% of computer problems are solved by a reset.
+> A reset solves> 99% of computer problems.
 
 ## The SAMD21 WDT
 
-The ATSAMD21 chip includes a WDT, and there are a few libraries to access it ina. simplified way. A simple to use one is [Adafruit's Sleepy_Dog](https://github.com/adafruit/Adafruit_SleepyDog).
+The ATSAMD21 chip includes a WDT, and there are a few libraries to access it in a simplified way. A simple to use one is [Adafruit's Sleepy_Dog](https://github.com/adafruit/Adafruit_SleepyDog).
 
-> The library is a good abstraction, but it could use better documentation perhaps. e.g. `resetCause()`
+> The library is a good abstraction, but it could use better documentation, perhaps. e.g. `resetCause()`
 
-My first attempt was to simply schedule a 5-minute timer (plenty for all my operations) and then schedule a 1 min reset using the scheduler. The solution was great and elegant:
-
+My first attempt was to schedule a 5-minute timer (plenty for all my operations) and then schedule a 1 min reset using the scheduler. The solution was great and elegant:
 
 ```c++
   dispatcher.add("Reset WDT", actions.resetWDTAction, 1);  
@@ -58,7 +57,7 @@ if((maxPeriodMS >= 16000) || !maxPeriodMS) {
       ...
 ```
 
-Which is a little it tight for my use case. While the system is doing nothing most of the time, some operations are actually quite lengthy. For example, refreshing the e-paper display takes a while, refreshing a token requires a network round-trip. A full authorization might take even longer when you consider these steps:
+Which is a little bit tight for my use case. While the system is doing nothing most of the time, some operations are quite lengthy. For example, refreshing the e-paper display takes a while, refreshing a token requires a network round-trip. A full authorization might take even longer when you consider these steps:
 
 1. Call Auth0 to start the process.
 2. Display the QRCode for scanning the URL with a phone.
@@ -66,9 +65,9 @@ Which is a little it tight for my use case. While the system is doing nothing mo
 4. Complete the process.
 5. Clean up the display and display another quote.
 
-Some googling later, I found a few alternatives, but I did not like any of them. And then I came up with an even simpler and elegant solution.
+Some googling later, I found a few alternatives, but I did not like any of them. And then, I came up with an even more straightforward and elegant solution.
 
-It turns out I already have a long-running timer, the RTC used by the scheduler that emits an event every 1 min. This is interrupt driven so fairly independent of what is going on in the rest of the system.
+It turns out I already have a long-running timer, the RTC used by the scheduler that emits an event every 1 min. The RTC is interrupt driven so reasonably independent of what is going on in the rest of the system.
 
 The handler for this interrupt simply sets a flag:
 
@@ -116,7 +115,7 @@ void loop(){
 
 ```
 
-If `loop()` is called, we are in business. If it isn't and the WDT is on, the CPU will be reset.
+If `loop()` is called, we are in business. If it isn't and the WDT is on, then the CPU resets.
 
 This is essentially a (very simple) cascading WDT. The first one is the RTC, the second the chip's actual WDT.
 
@@ -152,4 +151,4 @@ This flag is set if a BOD12 reset occurs.
 This flag is set if a POR occurs
 
 
-I've added this information to the telemetry payload so I get an insight of how often it actually happens. Notice the register also tells us if the board runs out of power and shuts down on a power failure. 
+I've added this information to the telemetry payload to get an insight into how often it happens. Notice the register also tells us if the board runs out of power and shuts down on a power failure. 
