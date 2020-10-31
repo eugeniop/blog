@@ -9,7 +9,7 @@ author: Eugenio Pace
 
 In a [previous post]({% post_url 2020-01-25-A-Simple-Command-Line-Interface-for-Arduino %}) I described a simple approach for sending commands to an Arduino based project via the `Serial` interface.
 
-A reader of this blog asked for a complete sample, so I took some time to refactor the code a little it and build a running sample. And here it is:
+A reader of this blog asked for a complete sample, so I took some time to refactor the code a little bit and build a running sample. And here it is:
 
 > This is not to be confused with the [Arduino CLI](https://github.com/arduino/arduino-cli), which is something completely different.
 
@@ -265,9 +265,25 @@ Every command is a function with this prototype:
 int f(char args[][ARG_BUF_SIZE]);
 ```
 
+Generally, it will have this structure:
+
+```c++
+int f(char args[][ARG_BUF_SIZE]){
+  if(cli.help(args, "mycommand", "The help text of the command") == CMD_OK){
+    return CMD_OK;
+  }
+
+  //Your code here
+
+  return CMD_OK;
+}
+
+
+```
+
 It must return `CMD_OK` or `CMD_FAIL`.
 
-The `CLI::.help` method, allows each command to return a help message. `CLI::run` is the main entry point. It will return immediately if there are no characters on `Serial`. It will wait until `\n` is sent.
+The `CLI::help` method, allows each command to return a help message. `CLI::run` is the main entry point. It will return immediately if there are no characters on `Serial`. It will wait until `\n` is sent.
 
 
 This is the output when the sample runs:
