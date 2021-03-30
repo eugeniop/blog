@@ -7,7 +7,9 @@ comments: true
 author: Eugenio Pace
 ---
 
-Many web applications now require MFA which is great to see. Some use time based tokens (TOTP), with application like Google Authenticator to enroll and generate them. Others use SMS messages which are not super secure but better than nothing I guess. Others use a combination: TOTP with SMS as fallback. Very few apps have the sophistication to allow multiple phones to be enrolled on a given account.
+Many web applications now require MFA which is great to see. Some use time based tokens (TOTP), with application like Google Authenticator to enroll and generate them. Others use SMS messages which are not super secure but better than nothing I guess... Others use a combination: TOTP with SMS as fallback. Very few apps have the sophistication to allow multiple phones to be enrolled on a given account.
+
+> There are many reported issues with SMS based MFA. Please consider other options if you are implementing MFA in your apps.
 
 This little project started with a simple problem: I've got 2 phones (work + personal) and while I carry both most of the time, I sometimes don't have the one I need at hand. Naturally, this seems to happen more often when I need to respond to an SMS MFA challenge.
 
@@ -104,6 +106,8 @@ Usual disclaimers apply. There's plenty here missing. To name a few:
 1. Not a lot of error handling.
 2. No rate limiting on the API (I guess you can front it with Cloudflare or equivalent).
 3. There's no bootstrap code (e.g. no signup). Notice the `subscriber` array is _hardcoded_. 
+4. SMS is not that great as an MFA factor. I would strongly advice everyone to consider other alternatives, but alas, we live in an imperfect world.
+
 
 So...use at your own risk. 
 
