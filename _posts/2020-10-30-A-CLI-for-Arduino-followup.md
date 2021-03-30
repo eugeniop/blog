@@ -274,11 +274,9 @@ int f(char args[][ARG_BUF_SIZE]){
   }
 
   //Your code here
-
+  
   return CMD_OK;
 }
-
-
 ```
 
 It must return `CMD_OK` or `CMD_FAIL`.
