@@ -9,7 +9,7 @@ author: Eugenio Pace
 
 As I was experimenting with the [SMS Broadcaster]({% post_url 2021-03-29-A-Broadcaster-For-SMS-MFA-Challenges %}), [one of my projects]({% post_url 2020-01-18-A-Display-of-Stoic-Quotes-using-Arduino-and-e-Paper-Display %}) stopped working suddenly.
 
-I haven't made changes in months, at has been reliably working so it was a little bit surprising.
+I haven't made any changes in months, and it has been reliably working so it was a little bit surprising.
 
 It turns out that the device uses `refresh_token` to renew `access_tokens` to call the backend API. I didn't realize that the refresh token request is affected by MFA settings (I should know better, shouldn't I? But alas...).
 
@@ -25,7 +25,7 @@ function multifactorAuthentication(user, context, callback) {
 }
 ```
 
-With this, all requests would be challenged. My Arduino code did not take that into account and would simply try to renew the token _ad aeternum_.
+With this, all requests would be challenged. My Arduino code did not take that condition into account and would simply try to renew the token _ad aeternum_.
 
 The message you get back when this happens is something like this:
 
