@@ -67,8 +67,8 @@ function getSubscriber(from, done){
 
 // SMS
 /*------------ Twilio App Main ---------------*/
-server.post('/', smsHandler);
-server.get('/', smsHandler); 
+server.post('/', twilio.webhook(), smsHandler);
+server.get('/', twilio.webhook(), smsHandler); 
 
 function smsHandler(req, res, next){
 
@@ -149,7 +149,7 @@ function smsHandler(req, res, next){
   });
 }
 
-fucntion sendSMSToRecipient(from, to, msg, done){
+function sendSMSToRecipient(from, to, msg, done){
   var tw = require('twilio')(process.env.TWILIO_SID, process.env.TWILIO_AUTH_TOKEN);
   tw.messages
           .create({
