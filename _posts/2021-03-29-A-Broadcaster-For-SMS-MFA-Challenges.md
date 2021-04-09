@@ -18,85 +18,146 @@ Also, I am (was) often on an airplane with no access to SMS sometimes (Apple Mes
 
 ### The SMS Broadcaster
 
-The solution was incredible straight forward. 
+The solution was incredibly straight forward: 
 
 1. Get a Twilio Phone
 2. Use that phone in all apps
 3. Write a simple API (a webhook in Twilio's lingo) that forwards all messages to your phones/Slack/etc.
-4. Enjoy! 
+4. Enjoy!
 
 The code for the API is very simple (at least as a proof of concept):
 
 ```js
-const express = require('express');
+const axios = require('axios');
+const server = require('express')();
+
 const async = require('async');
 const _ = require('lodash');
 const twilio = require('twilio');
 
 const { log } = console;
 
-const server = express();
-
-const subscriber = [
+const subscribers = [
   {
-    app: 'An App',
-    from: '+12344567890', //The source phone (the application's phone)
-    to: ['+11112223333', '+12223334444', '+14445556666']  //Phones to broadcast to
+    name: "Auth0 Test MFA",
+    from: '+12223334444',
+    sms: ['+14443332222', '+10009998765'],
+    slack: [ process.env.MFA_SLACK_WEBHOOK ]
   },
   {
-    app: 'Another app',
-    from: '+19876541111',
-    to: ['+11112223333', '+12223334444']  //Phones to broadcast to
-  },
+    name: "Github",
+    from: '+15556667777',
+    sms: ['+14443332222'],
+    slack: []
+  }
 ];
 
+function getSubscriber(from, done){
+  log("Looking for ", from);
+  const subscriber = _.find(subscribers, (i) => from === i.from);
+  if(subscriber){
+    return done(null, subscriber); //If we find the origin we just return that
+  }
+  done(null,   {  //Origin not found (GitHub for example changes the source phone number it seems)
+                  name: "Unknown",
+                  sms: ['+14443332222', '+10009998765'],
+                  slack: [ process.env.MFA_SLACK_WEBHOOK ]
+                });
+}
+
 // SMS
-// The Webhook route
-server.post('/sms', twilio.webhook(), smsHandler);
-server.get('/sms', twilio.webhook(), smsHandler); 
+/*------------ Twilio App Main ---------------*/
+server.post('/', smsHandler);
+server.get('/', smsHandler); 
 
 function smsHandler(req, res, next){
 
-  //Twilio supports both GET and POST. GET is easier to test with a browser
-  const from = req.body ? req.body.From : req.query.From;
-  const msg = req.body ? req.body.Body : req.query.Body; 
+  const from = req.body && req.body.From ? req.body.From : req.query.From;
+  const msg = req.body && req.body.Body ? req.body.Body : req.query.Body; 
+  
+  getSubscriber(from, (e,subscriber) => {
 
-  //Do we recognize the sender?
-  const s = _.find(subscriber, (i) => from === i.from);
+    if(e){ 
+      log('Error retrieving subscriber');
+      console.log(e);
+      return res.status(200).end();
+    }
 
-  if(s){
-    log(`Message from ${s.app}`);
+    if(!subscriber){
+      log('No Subscriber!');
+      return res.status(200).end();
+    }
+
+    function buildBroadcastingWorkers(){
+      var workers = [];
+
+      //This builds SMS broadcasters
+      if(subscriber.sms){
+        const s = _.map(subscriber.sms, (phone) => {
+                                        return function(cb){
+                                                  log("SMS to phone:", phone);
+                                                  return sendSMSToRecipient(process.env.MFA_FROM_PHONE, phone, `MFA challenge from ${subscriber.name}\n${msg}`, cb);
+                                                };
+                    });
+        workers.push(...s);
+      }
+
+      //This one adds slacks
+      if(subscriber.slack){
+        workers.push( ..._.map(subscriber.slack, (slackWH) => {
+                          return function(cb){
+                                    const options = { 
+                                            method: 'POST',
+                                            url: slackWH,
+                                            headers: { 'content-type': 'application/json' },
+                                            data:  {
+                                                      username: 'MFA Broadcaster',
+                                                      text: `*New MFA challenge*\n From: ${subscriber.name}\n\n\`\`\`\n${msg}\n\`\`\``,
+                                                      channel: '#mfa', 
+                                                      icon_emoji: ':key:'
+                                                    }
+                                          };
+                                    axios(options)
+                                      .then(res => {
+                                        log('Sent to SLACK');
+                                        console.log(res.data);
+                                        cb();
+                                      })
+                                      .catch(err => {
+                                        console.log(err);
+                                        cb(err);
+                                      });
+                                }
+                          }));
+      }
+
+      return workers;
+    }
+
     async.series(
-      //This creates the array of functions for _async_ to call
-      _.map(s.to, (phone) => {
-        return function(cb){
-          return sendSMSToRecipient(process.env.FROM_PHONE, phone, msg, cb);
-        };
-      }),
+      buildBroadcastingWorkers(),
       (error) => {
         if(error){
-          log("Error broadcasting Message");
+          log("Error broadcasting OTP Message");
+          log(error);
+        } else{
+          log("OTP Message broadcasted!");
         }
-        res.status(200).end();
+        return res.status(200).end();
       }
     );
-  } else {
-    log(`Application with phone: ${from} not found`);
-    log(`Message: ${msg}`);
-    res.status(200).end();
-  }
+  });
 }
 
-function sendSMSToRecipient(from, to, msg, done){
-  const tw = require('twilio')(process.env.TWILIO_SID, 
-                               process.env.TWILIO_AUTH_TOKEN);
+fucntion sendSMSToRecipient(from, to, msg, done){
+  var tw = require('twilio')(process.env.TWILIO_SID, process.env.TWILIO_AUTH_TOKEN);
   tw.messages
           .create({
                     to: to,
                     from: from,
                     body: msg
                   }, done);
-};
+}
 ```
 
 #### Disclaimers
