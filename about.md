@@ -6,9 +6,9 @@ permalink: /about/
 
 ![](/media/eugeniop-2.png)
 
-This is my personal technical blog. I'm Eugenio. A problem solver. My formal background is in electrical engineering and computer science. But I am also a learner and am curious anout everything. I like stoic principles and philosophy. I enjoy reading the works of Seneca, Epictetus and Marcus Aurelius. I wake in the morning in awe of the world we live in.
+This is my personal technical blog. I'm Eugenio. A problem solver. My formal background is in electrical engineering and computer science. But I am also a learner and am curious about almost everything. I like stoic principles and philosophy. I enjoy reading the works of Seneca, Epictetus and Marcus Aurelius. I wake in the morning in awe of the world we live in, and grateful for the privilege of living here.
 
-I am co-founder and CEO at [Auth0](https://auth0.com), the company I founded with my brother in arms [Matias Woloski](https://twitter.com/woloski). I love tinkering and building stuff. I work/play with software, hardware, tools, houses, cars, bikes, wood, metal, farms. I like lifting heavy things, because then everything seems light (_Tough training, easy combat_). I ride bikes and row boats. I love traveling around the world and history. When in Rome, I order gelato. I lead by example. 
+I am co-founder and CEO at [Auth0](https://auth0.com), the company I founded with my brother in arms [Matias Woloski](https://twitter.com/woloski). I love tinkering and building stuff. I work/play with software, hardware, tools, houses, cars, bikes, wood, metal, teams, farms. I like lifting heavy things, because then everything seems light (_Tough training, easy combat_). I ride bikes and row boats. I love traveling around the world and history. When in Rome, I order gelato. I lead by example. 
 
 My home is in the Pacific Northwest, in the United States, but I feel a citizen of the world.
 
