@@ -2,7 +2,7 @@
 layout: post
 title: "Exploring the Dexcom API"
 date:   2021-08-14 03:16 -0800
-categories: dexcom cgm api
+categories: dexcom cgm api offline
 comments: true
 author: Eugenio Pace
 ---
