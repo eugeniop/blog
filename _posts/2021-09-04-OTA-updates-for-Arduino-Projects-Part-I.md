@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "OTA updates for Arduino Projects - Part I"
+title: "OTA Updates for Arduino Projects - Part I"
 date:   2021-09-04 17:49 -0800
 categories: arduino ota sdu updates 
 comments: true
@@ -35,10 +35,11 @@ Here's how you fix it:
 
 Notice that by default the library checks for a file `UPDATE.BIN` (this is also defined on the `SDUBoot.ino` sketch), which you can customize too.
 
-Of course anytime you update the board support files these changes will be overwritten. Thus this post. A reminder of what I need to do. Hope you also find it useful.
+Of course anytime you update the board support files these changes will be overwritten. Thus this post as a reminder of what I need to do. Hope you also find it useful.
 
 This is just the device side of things, in a future post I will cover the rest of the parts (which I have not built yet): 
 
 1. Create an API to check for updates.
 2. Download and verify them.
 3. The backend infrastructure for versions and keep track of installed versions.
+4. The support in the sketch for calling the API regularly.
