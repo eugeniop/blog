@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "OTA Updates for Arduino Projects - Part I"
-date:   2021-09-04 17:49 -0800
+date:   2021-09-04 16:49 -0800
 categories: arduino ota sdu updates 
 comments: true
 author: Eugenio Pace
