@@ -46,3 +46,5 @@ This is just the device side of things, in a future post I will cover the rest o
 2. Download and verify them.
 3. The back end infrastructure for versions and keep track of installed versions.
 4. The support in the sketch for calling the API regularly.
+
+But I don't need any of this to test things out as you can export a compiled image from the IDE and simply copy it to the SD card, then reboot; the new version should run.
