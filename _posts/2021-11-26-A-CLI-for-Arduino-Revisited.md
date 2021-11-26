@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "A CLI for Arduino revisited"
-date:   2021-12-02 9:31 -0800
+date:   2021-11-26 9:31 -0800
 categories: arduino cli
 comments: true
 author: Eugenio Pace
