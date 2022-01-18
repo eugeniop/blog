@@ -13,10 +13,10 @@ A little exploration led me to find their developer portal. I love when companie
 
 As I explored the [documentation](https://developer.dexcom.com/overview), I found that Dexcom uses OAuth2 as the protocol to authorize access, so I immediately started looking at ways to integrate it with Auth0.
 
-Auth0 has a support for connecting to generic OAuth2 authorization servers, all you need to provide is:
+Auth0 has support for connecting to generic OAuth2 authorization servers, all you need to provide is:
 
-1. The login endpoint
-2. The token exchange endpoint
+1. The login endpoint (where authentication starts).
+2. The token exchange endpoint.
 3. An implementation of a function to get a user profile (or a `user_id` at minimum).
 4. Optional `headers` & `scope`
 
@@ -38,7 +38,6 @@ function(accessToken, ctx, cb) {
 
 This creates a unique `User` in Auth0. The `accessToken` is securely stored in the user profile. Dexcom also supports requesting `offline_access` as the scope, which results in _both_ an `accessToken` and a `refresh_token` to be issued. 
 
-Your system can then use the Auth0 Management API to retrieve these values and call the Dexcom API to access all sorts of interesting information.
+Your system can then use the [Auth0 Management API]() to retrieve these values and call the Dexcom API to access all sorts of interesting information.
 
-To retrieve sensitive information from the user profile (like the tokens), you need the scope `read:user_idp_tokens`. 
-
+To retrieve sensitive information from the user profile (like the IdP `access_token`), you need the scope `read:user_idp_tokens`.

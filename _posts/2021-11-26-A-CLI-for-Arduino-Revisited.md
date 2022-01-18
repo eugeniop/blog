@@ -7,7 +7,7 @@ comments: true
 author: Eugenio Pace
 ---
 
-A [reader](https://disqus.com/by/edgarbonet/?) of this blog pointed out that my implementation of the Arduino CLI was using memory sub-optimally. He also wrote my implementation would not work on an Arduino UNO, but I don't have one, so I cannot test it. 
+A [reader](https://disqus.com/by/edgarbonet/?) of this blog pointed out that my implementation of the Arduino CLI was using memory sub-optimally. He also wrote my implementation would not work on an Arduino UNO. I don't have one, so I cannot test it. 
 
 I liked the challenge and I like permanent improvement, so here I am revisiting the implementation and following his advice.
 

@@ -94,7 +94,7 @@ File configFile = SD.open(CONFIG_FILE, O_RDWR | O_CREAT);
 
 ## The invisible CR
 
-Having sorted that, things were still not working as expected. Specifically, WiFi stopped working altogether. A lot `Serial.println` later, I couldn't figure out what was going on. It was as if the network was not available. I suspected a conflict between the different SPI devices. After all, in isolation, each one worked fine. When I combined all together it didn't. Unfortunately for me, this. is actually possible, and there's a bunch of results on potential SPI conflicts if you google around. 
+Having sorted that, things were still not working as expected. Specifically, WiFi stopped working altogether. A lot `Serial.println` later, I couldn't figure out what was going on. It was as if the network was not available. I suspected a conflict between the different SPI devices. After all, in isolation, each one worked fine. When I combined all together it didn't. Unfortunately for me, this is actually possible, and there's a bunch of results on potential SPI conflicts if you google around. 
 
 > Arduino libraries now ship an `SPI.beginTransaction()` and `SPI.endTransaction()` functions to capture and restore the configuration state of a particular device that helps isolate the changes and potential issues. But all this seems applicable for lower-level libraries (like the `SD` library itself).
 
