@@ -55,12 +55,12 @@ domain.getSummaryData = (access_token, n, unit, done) => {
 1. The awesome `moment` module helps format the dates in the way Dexcom expects.
 2. `endDate` is always `now`.
 3. The `Simple-Statistics` module makes it trivial to compute various parameters (e.g. median, min, max, etc). Likely not super efficient. 
-4. I use a `cron` job to run this periodically.
+4. I use a `cron` job to run this periodically (more on this in a future post)
 
 The parameters for the function allow you to specify any interval from `now`:
 
 ```sh
-1 'day'
-10 'hour'
-5 'minute'
+n=1, unit='day'
+n=10, unit='hour'
+n=5, unit='minute'
 ```
