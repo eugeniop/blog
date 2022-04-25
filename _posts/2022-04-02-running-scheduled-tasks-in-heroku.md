@@ -103,15 +103,13 @@ const fs = require("fs");
   .readdirSync(normalizedPath + "/apps", { withFileTypes: true })
     .forEach((file) => {
       
-      var crons = [];
-
       //Folders that start with "_" are ignored by convention
       if(file.isDirectory() && file.name.startsWith('_') === false){
         const cronPath = normalizedPath + "/apps/" + file.name + "/cronjobs";
         
         if(fs.existsSync(cronPath)){
 
-          const job = require(cronPath);
+          const job = require(cronPath);  //Each cronjob file can contain many "crons"
           job.forEach((cj) => {
             log('Loading ' + cj.name);
             log('Schedule: ', cj.schedule);
