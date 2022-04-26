@@ -166,7 +166,7 @@ module.exports = {
 
 ## Notable missing parts / caveats / notes
 
-* Bootstrapping here is done manually: I hardocoded the array I called `vestaboards`. 
+* Bootstrapping here is done manually: I hardcoded the array I called `vestaboards`. 
 * Notice I use `async.reflect`, a neat function I learned about while researching this implementation. 
 * Also notice that the job is exported and plugs into y cronjob framework described [here]({% post_url 2022-04-02-running-scheduled-tasks-in-heroku %}).
 * The logging infrastructure is pretty primitive (a.k.a. `console.log`)
