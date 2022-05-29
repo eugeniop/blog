@@ -89,10 +89,12 @@ class HTTPRequest {
     
     typedef enum { HEADERS, BODY } HTTP_RX_STATE;
 
-    void ParseHeader(char * line){
+    void parseHeader(char * line){
 
+      //Status line
       if(strncmp(line, "HTTP/1.1", 8)==0){
-        //Parse status code like: "HTTP-Version SP Status-Code SP Reason-Phrase CRLF" e.g. "HTTP/1.1 200 OK\r\n"
+        //Parse status code like: 
+        //"HTTP-Version SP Status-Code SP Reason-Phrase CRLF" e.g. "HTTP/1.1 200 OK\r\n"
         char * s = strchr((char *)line, ' ');
         s++;
         response.statusCode =  (*s++ - '0')*100;
@@ -101,35 +103,43 @@ class HTTPRequest {
         return;
       }
 
-     /*
-     * For downloads: Content-Disposition: attachment; filename="filename.jpg"
-                      1234567890123456789012345678901234567890123
-     */ 
+      /*
+        For downloads, header would be: 
+        "Content-Disposition: attachment; filename="filename.jpg"
+         1234567890123456789012345678901234567890123
+      */ 
       if(strncmp(line, "Content-Disposition", 19)==0){
-        strtok(line, "\"");
+        strtok(line, "\""); //Find filename
         const char * fileName = strtok(NULL, "\"");
         debug.log("HTTP", "File download: ", fileName);
         strcpy(response.fileName, fileName);
-        response.file = 1;
+        response.file = 1;  //Signal this is a file download
         return; 
       }
       
+      /*
+        Check if length is known
+      */
       if(strncmp(line, "Content-Length", 14)==0){
         char * l = strchr((char *)line, ' ');
         response.length = atoi(l);
         debug.log("HTTP", "Response length: ", response.length);
         return;
-       }
+      }
 
-       //In some cases, payload might come "chunked"
-       if(strncmp(line, "Transfer-Encoding: chunked", 26)==0){
+      //In some cases, payload might come "chunked"
+      if(strncmp(line, "Transfer-Encoding: chunked", 26)==0){
         debug.log("HTTP", "Response chunked");
         response.chunked = 1;
         return;
-       }
+      }
     }
 
+    /* 
+      When dealing with a file download, we rely on an SD card
+    */
     HTTPResponse * processFileDownload(){
+      // For files, the following 2 attributes indicate:
       // response.length contains the size of the file
       // this->fileName is the name of the file
 
@@ -138,8 +148,9 @@ class HTTPRequest {
         return NULL;
       }
 
-      File file = SD.open(response.fileName, O_RDWR | O_CREAT); //FILE_WRITE inlcudes the O_APPEND flag which prevents seek to work.
-      file.seek(0); // Write from the beginning
+      File file = SD.open(response.fileName, O_RDWR | O_CREAT); 
+                  //FILE_WRITE includes the O_APPEND flag which prevents seek to work.
+      file.seek(0); // Write from the beginning, in case the file exists, we just overwrite
 
       int bytesWritten = 0;
       int bytesReady = 0;
@@ -157,6 +168,7 @@ class HTTPRequest {
       file.close();
       client.stop();
       
+      //Check that all bytes of the file were read and written to the SD card
       if(bytesWritten == response.length){
         debug.log("HTTP", "File downloaded");
         return &response;
@@ -200,70 +212,71 @@ class HTTPRequest {
       return &response;
     }
 
-    /* a simple state machine to process headers + content
+    /* 
+      A very simple state machine to process headers + content
+      Either we are reading the HEADERS section or the BODY
     */
     HTTPResponse * processResponse(void (*onHeader)(const char * header)){
       //Resets the response object
       response.reset();
       
-    //Small delay to allow the library to catchup (it seems)
-    (*keepAlive)();
-    delay(2000);
-    (*keepAlive)();
-    HTTP_RX_STATE state = HEADERS;
+      //Small delay to allow the library to catchup (it seems...)
+      (*keepAlive)();
+      delay(2000);
+      (*keepAlive)();
+      HTTP_RX_STATE state = HEADERS;
     
-    while(client.available()){
-      switch(state){
-        case HEADERS:
-          //char line[MAX_HTTP_HEADER];
-          //Reusing the buffer we already have on the Response object
-          response.data[client.readBytesUntil('\n', response.data, sizeof(response.data))] = '\0';
-          if(strlen(response.data) == 1){
-            //Headers - Body separator
-            state = BODY;
-          } else {
-            
-            ParseHeader(response.data);
-            if(onHeader){
-              (*onHeader)(response.data);  //If client requested callbacks for headers, call them. This is used for downloading updates
-            }
-          }
-          (*keepAlive)();
-          break;
-        case BODY:
-          if(response.length == 0 && response.chunked ==0){
-            debug.log("HTTP", "No content");
-          } else {      
-            if(response.file){
-              debug.log("HTTP", "Processing file download");
-              return processFileDownload();
-            }
-            
-            //Response might be "chunked"
-            if(response.chunked){
-              debug.log("HTTP", "Processing chunked response");
-              return processChunkedResponse();
-            }
-
-            //Content-Length is present
-            if(sizeof(response.data) < response.length + 1){
-              errorLog.log("HTTP", "Not enough memory for response body");
-              response.length = 0;
+      while(client.available()){
+        switch(state){
+          case HEADERS:
+            // Reusing the buffer we already have on the Response object
+            response.data[client.readBytesUntil('\n', response.data, sizeof(response.data))] = '\0';
+            if(strlen(response.data) == 1){
+              //Headers - Body separator
+              state = BODY;
             } else {
-              debug.log("HTTP", "Reading response body");
-              debug.log("HTTP", "Len:", response.length);
-              (*keepAlive)();
-              client.readBytes(response.data, response.length);
-              response.data[response.length] = '\0';
-              debug.logHex("HTTP", "Non-chunked Response: ", response.data, response.length);
+              parseHeader(response.data);
+              if(onHeader){
+                //If client requested callbacks for headers, call them. This is primarily used for downloading updates
+                (*onHeader)(response.data);  
+              }
             }
-          }
-          client.stop();
-          break;
+            (*keepAlive)();
+            break;
+          case BODY:
+            if(response.length == 0 && response.chunked ==0){
+              debug.log("HTTP", "No content");
+            } else {      
+              if(response.file){
+                debug.log("HTTP", "Processing file download");
+                return processFileDownload();
+              }
+              
+              //Response might be "chunked"
+              if(response.chunked){
+                debug.log("HTTP", "Processing chunked response");
+                return processChunkedResponse();
+              }
+
+              //Content-Length is present. This is for relatively small payloads
+              if(sizeof(response.data) < response.length + 1){
+                errorLog.log("HTTP", "Not enough memory for response body");
+                response.length = 0;
+              } else {
+                debug.log("HTTP", "Reading response body");
+                debug.log("HTTP", "Len:", response.length);
+                (*keepAlive)();
+                client.readBytes(response.data, response.length);
+                response.data[response.length] = '\0';
+                debug.logHex("HTTP", "Non-chunked Response: ", response.data, response.length);
+              }
+            }
+            client.stop();
+            break;
+        }
       }
-    }
-  	(*keepAlive)();
-  	return &response;
+  	  (*keepAlive)();
+      return &response;
    }
 
     int ConnectServer(const char * server, int port){
@@ -308,9 +321,7 @@ class HTTPRequest {
     void sendHTTPHeaders(Stream & s, const char * verb, const char * route, const char * server, const char * access_token, const char * contentType, int length){
       (*keepAlive)();
       s_printf(&s, "%s %s HTTP/1.1\r\n", verb, route);
-      s_printf(&Serial, "%s %s HTTP/1.1\r\n", verb, route);
       s_printf(&s, "Host: %s\r\n", server);
-      s_printf(&Serial, "Host: %s\r\n", server);
       
       if(access_token && strlen(access_token) > 0){
         s.print("Authorization: Bearer ");  //s_printf has a limited buffer. Tokens can be long
@@ -318,11 +329,9 @@ class HTTPRequest {
       }
       if(contentType && strlen(contentType)>0){
         s_printf(&s, "Content-Type: %s\r\n", contentType);
-        s_printf(&Serial, "Content-Type: %s\r\n", contentType);
       }
       if(length>0){
         s_printf(&s, "Content-Length: %d\r\n", length);
-        s_printf(&Serial, "Content-Length: %d\r\n", length);
       }
       s_printf(&s, "Connection: close:\r\n\r\n");
       (*keepAlive)();
@@ -334,7 +343,7 @@ class HTTPRequest {
       }
       sendHTTPHeaders(client, "POST", route, server, access_token, contentType, strlen(response.data));
       debug.logHex("HTTP", "POST", response.data, sizeof(response.data));
-      client.print(response.data);
+      client.print(response.data);  //Notice the "SEND" buffer is the response too.
       return processResponse(onHeader); 
     }
     
@@ -408,18 +417,19 @@ void (*HTTPRequest::keepAlive)();
 
 ## Implementation notes
 
-* The `keepAlive` static member is a pointer to kick the `Watchdog timer`. Every time we do something that might take time, we call this. It doesn't work all the time (the board still resets every once in a while, but it works)
+* The `keepAlive` static member is a callback to kick the `Watchdog timer`. Every time we do something that might take time, we call this. It doesn't work all the time. The board still resets every once in a while, and as far as I can tell it is always related to network operations. I am not sure. Anyway, kicking the WDT often helps.
 
 * The `onHeader` callback allows any client of the library to parse any header. I use this only to parse the version of a downloaded update for OTA. The header `"X-FirmwareVersion": 2.0.1` for example. It is only used for notifications and status report.
 
-* `postStreamedContent` allows me to send contents to the network socket directly. Useful for example when I need to upload a larger JSON I don't know the size of in advance. Here's the technique I use:
+* `postStreamedContent` allows me to send contents to the network directly. Useful for example when I need to upload a larger JSON I don't know the size of in advance. Here's the technique I use:
 
-. First I save the JSON to a file
-. I get the size using filesystem functions
-. Open the stream and the serialize the JSON straight to it directly
+  * First I save the JSON to a file (all my boards always have an SD Card)
+  * I get the size using filesystem functions
+  * I open the stream and the serialize the JSON straight to it directly
 
 This works great and saves memory. The `ArduinoJson` library supports this directly (serializing to streams so _"it just works"_(c))
 
 * All the `debug.log` and `error.log` you see all over the code is a very simple class that writes to the terminal. Nothing fancy.
 
 * There are various `WiFi_SOMETHING` which is also a bunch of boilerplate code for the WiFi functions. I have various projects on different boards: *Adafruit*, *MKR1000*, etc. Some of these use the `WiFi101` library, others use `WiFiNINA`. The helper library abstracts this for me.
+

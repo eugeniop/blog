@@ -23,7 +23,7 @@ twitter_username: eugenio_pace
 github_username:  eugeniop
 
 # Uncomment for testing future posts locally
-future: false
+future: true
 
 show_excerpts: true
 
