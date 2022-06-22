@@ -22,7 +22,7 @@ In my app, memory is a constraint. The board I am using is quite generous, but w
 
 In my app, things happen one at a time. There's no "OS", no concurrency, no re-entrant code (for the most part). Which allows me reasonably and safely _reuse_ blocks of memory. An obvious example is a buffer for a `request` and a buffer for a `response`. I can simply have one.
 
-Because memory fragmentation can be an issue too, I tend to favor static buffers of pre-defined sizes, designed for the expected use, and some code protections in case something goes wild. That's why most of my functions will take a `size_t` parameter everytime I am dealing with buffers. I can check how far I am going (e.g. copying or moving data). Also, minimal dynamic allocations.
+Because memory fragmentation can be an issue too, I tend to favor static buffers of pre-defined sizes, designed for the expected use, and some code protections in case something goes wild. That's why most of my functions will take a `size_t` parameter everytime I am dealing with buffers. I can check how far I am going (e.g. copying or moving data). Also, minimal dynamic allocations. Last, but not least, I tend to stay away from using `String`. Here's [an excellent article](https://hackingmajenkoblog.wordpress.com/2016/02/04/the-evils-of-arduino-strings/) on the issues with this class.
 
 ## The original library 
 
