@@ -7,6 +7,8 @@ author: Eugenio Pace
 comments: true
 ---
 
+> As of June 2022, some of these libraries are outdated/deprectaed (e.g. `request`)
+
 A reader of this blog, [tjaffri](https://disqus.com/by/tjaffri/), raised two questions:
 
 1. `refresh_tokens` did not work with Alexa (and Auth0).
