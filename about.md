@@ -15,3 +15,5 @@ My home is in the Pacific Northwest, in the United States, but I feel a citizen 
 All opinions here are mine. Content, code, designs are posted here as is, with no warranties of any kind.
 
 _Omnium enim rerum principia parva sunt_
+
+<a rel="me" href="https://noc.social/@eugeniop">Mastodon</a>
