@@ -38,3 +38,10 @@ Not bad for a machine and a human code editor.
 
 I need to polish the app a little bit, depending on the image, the resulting mosaic is not recognizable, and cropping would likely work better than a direct resize to 48x48 cells (what I am doing now).
 
+Here's a better algorithm that produces a 48x48 mosaic with 16 levels of gray scale:
+
+![](/media/kate2-lego.jpg)
+
+Even the 8 levels looks pretty good:
+
+![](/media/kate3-lego.jpg)
