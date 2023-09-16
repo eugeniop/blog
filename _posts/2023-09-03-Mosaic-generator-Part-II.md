@@ -18,14 +18,14 @@ The assumption is that the input image being processed contains a lot more pixel
 3. Compute the closest color in a given palette to the average.
 4. Add the resulting palette color (also 3 integers for RGB) into an output array.
 
-* Step 2 is accomplished by simply adding all `R`, `G` and `B` and dividing by number of pixles in a tile.
+* Step 2 is accomplished by simply adding all `R`, `G` and `B` and dividing by number of pixels in a tile.
 * Step 3 is a little bit more interesting, but simple too. I am just using the *Euclidean* distance of the average to all palette reference colors:
 
 `D = SQRT( (Ri - Rp)^2 + (Gi - Gp)^2 + (Bi - Bp)^2 )`
 
 `Ri`, `Gi`, and `Bi` is the input (average) color. `Rp`, `Gp`, and `Bp` is the `RGB` value of the reference palatte. And I am comparing it to all values in the palette. *Gray scale* is 16. *Lego* is about 227 and *Prisma* is 150. In any case, it is pretty fast...
 
-The complete function looks like this:
+The complete module looks like this:
 
 ```js
 const sharp = require('sharp');
@@ -202,4 +202,4 @@ exports.processImageToGrid = (image, type, palette, gridWidth, gridHeight) => {
 }
 ```
 
-Using the `get-pixels` and `sharp` modules was OpenAI idea and it simplifies things quite a bit. There are many optimization opportunities. For example, `hexToRgb` is called on the palette reference values (which are ... duh... reference!). All this can be pre-computed. But in my quick and dirty experiments, it is pretty fast anyway.
+Using the `get-pixels` and `sharp` modules was OpenAI idea and it simplifies things quite a bit. There are many optimization opportunities. For example, `hexToRgb` is called on the palette reference values (which are ... duh... reference!). All this can be pre-computed. Other values that are computed on each loop, could also be pre-computed. But in my quick and dirty experiments, it is pretty fast anyway; amd I'd rather spend the time pinting now or building legos.
