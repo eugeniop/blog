@@ -44,4 +44,12 @@ And _voilà_, there was the un-wired terminal:
 
 Some soldering and wiring later, I tried it out and all worked as expected and my QRCodes printed nicely again. A nice side effect is that the printer is much faster too.
 
-Too bad, this particular model is now discontinued by Adafruit.
+All it is required in the code is changing the constructor to:
+
+```c++
+ auto printer = new Adafruit_Thermal(&Serial1, 4);
+```
+
+In this case, the printer is wired to the `Serial1` port and uses pin 4 for DTR.
+
+Too bad, this particular printer model is now discontinued by Adafruit, but there are a few other options and all of them work with the same library. It would be great if QRCodes were a built in capability of these.
