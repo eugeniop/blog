@@ -7,6 +7,8 @@ author: Eugenio Pace
 comments: true
 ---
 
+> Dec 27th, 2023 update: Webtasks have been deprecated.
+
 I've got 2 dash buttons, configured to order stuff for us at home. They work great.
 
 It was exciting to see Amazon announcement of a "developer" [button](https://aws.amazon.com/iot/button/) that you could play with.

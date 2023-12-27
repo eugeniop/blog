@@ -7,6 +7,8 @@ comments: true
 author: Eugenio Pace
 ---
 
+Last post of 2023!
+
 One of my hobby applications allows the user to schedule an activity (in my case, sending a quote via SMS). The scheduling capabilities today are pretty basic, just the times of the day. Like `8, 9, 10` means `send a message at 8, 9 and 10 am PST`
 
 The backing technology is essentially a cronjob, so to keep things simple, I schedule the cronjob on every hour, and then I simply search for any jobs matching the time.

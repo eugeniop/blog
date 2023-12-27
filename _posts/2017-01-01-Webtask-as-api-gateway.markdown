@@ -7,6 +7,8 @@ comments: true
 author: Eugenio Pace
 ---
 
+> Dec 27th, 2023 update: Webtasks have been deprecated.
+
 A very convenient use case for Webtask is as a proxy for other APIs. A Webtask can be super handy to build an API that can:
 
 * *Adapt* different security models.

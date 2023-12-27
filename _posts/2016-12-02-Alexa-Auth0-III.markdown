@@ -7,6 +7,8 @@ author: Eugenio Pace
 comments: true
 ---
 
+> Dec 27th, 2023 update: Webtasks have been deprecated.
+
 > As of June 2022, some of these libraries are outdated/deprectaed (e.g. `request`)
 
 A reader of this blog, [tjaffri](https://disqus.com/by/tjaffri/), raised two questions:

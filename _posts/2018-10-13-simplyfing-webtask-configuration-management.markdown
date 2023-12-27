@@ -7,6 +7,8 @@ comments: true
 author: Eugenio Pace
 ---
 
+> Dec 27th, 2023 update: Webtasks have been deprecated.
+
 I have many little apps all implemented as [Webtasks](https://webtask.io). I've shown many of these in previous posts such as:
 
 1. [Controlling NEST thermostats & cameras]({% post_url 2017-11-25-controlling-a-nest-thermostat-with-sms %})

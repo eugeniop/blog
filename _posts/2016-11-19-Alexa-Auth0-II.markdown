@@ -7,6 +7,8 @@ comments: true
 author: Eugenio Pace
 ---
 
+> Dec 27th, 2023 update: Webtasks have been deprecated.
+
 > These two posts are largely based on a proof of concept project developed by my friend [Pushp Abrol](https://twitter.com/pushpabrol) for a customer. Thanks Pushp for your guidance!
 
 In the [previous post]({% post_url 2016-11-09-Alexa-Auth0 %}) I wrote about the basics of a custom Alexa skill, using Webtask to implement the core of it. This 2nd. part focuses on the security aspects.

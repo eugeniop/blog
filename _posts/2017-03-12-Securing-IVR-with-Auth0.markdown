@@ -7,6 +7,8 @@ comments: true
 author: Eugenio Pace
 ---
 
+> Dec 27th, 2023 update: Webtasks have been deprecated.
+
 One of the aspects I enjoy the most about my job, is the chance of working on exciting proof of concepts with customers. Once such opportunity presented itself last week. A customer asked how Auth0 would integrate with an IVR. That sounded like a good challenge.
 
 It turns out that I've implemented an IVR before for a farm automation and data capture system. It works something like this:

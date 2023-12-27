@@ -7,6 +7,8 @@ comments: true
 author: Eugenio Pace
 ---
 
+> Dec 27th, 2023 update: Webtasks have been deprecated.
+
 > These two posts are largely based on a proof of concept project developed by my friend [Pushp Abrol](https://twitter.com/pushpabrol) for a customer. Thanks Pushp for your guidance!
 
 Alexa is the voice service that powers the Amazon Echo device. It is surprisingly easy to work with as a developer.

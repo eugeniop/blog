@@ -7,6 +7,8 @@ comments: true
 author: Eugenio Pace
 ---
 
+> Dec 27th, 2023 update: Webtasks have been deprecated.
+
 After building the sample in [the previous post]({% post_url 2017-03-12-Securing-IVR-with-Auth0 %}) I got curious about a similar implementation with [Twilio](https://twilio.com).
 
 It took me abut 30 min to have this up and running. I bet you can do it faster.

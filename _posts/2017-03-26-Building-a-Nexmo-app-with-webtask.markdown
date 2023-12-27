@@ -7,6 +7,8 @@ comments: true
 author: Eugenio Pace
 ---
 
+> Dec 27th, 2023 update: Webtasks have been deprecated.
+
 [Nexmo](https://nexmo.com) is a communications platform that allows you to build SMS and voice apps.
 
 Like other systems in this space, Nexmo works as a gateway between the phone networks and your apps. Voice calls or inbound SMS messages are relayed to an endpoint that you host:

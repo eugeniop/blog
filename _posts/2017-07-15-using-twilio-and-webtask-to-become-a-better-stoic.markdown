@@ -7,6 +7,8 @@ comments: true
 author: Eugenio Pace
 ---
 
+> Dec 27th, 2023 update: Webtasks have been deprecated.
+
 I like to read a couple random paragraphs of [Marcus Aurelius'](https://en.wikipedia.org/wiki/Marcus_Aurelius) [Meditations](https://en.wikipedia.org/wiki/Meditations) every morning. It's one of various routines that helps me get organized and start the day.
 
 As much as I like the actual book, I wanted to share the daily dose of reflection and wisdom with my family and friends, so I built an SMS based system that delivers a daily paragraph of Marcus' meditations every morning.
