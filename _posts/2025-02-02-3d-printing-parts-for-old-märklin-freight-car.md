@@ -9,7 +9,7 @@ author: Eugenio Pace
 
 I love seeing old trains back in action, and there's no better way to do that than by buying vintage pieces at a train show.
 
-Not too long ago, I found one of my favorite cars: the iconic Märklin "Tiefladewagen" 4167 (Tiefladewagen is German for "low-loader wagon"—what we’d call a "flatbed" in the U.S.). This model carries a large electric transformer as its payload. The 4168 is a similar Tiefladewagen, but with a large wooden crate instead.
+Not too long ago, I found one of my favorite cars: the iconic Märklin _Tiefladewagen_ 4167 (Tiefladewagen is German for "low-loader wagon"—what we’d call a "depressed center flatcar" in the U.S.). This model carries a large electric transformer as its payload. The 4168 is a similar _Tiefladewagen_, but with a large wooden crate instead.
 
 The piece was in generally good shape, and it even came with an almost intact box. However, a few parts were missing: a couple of wheels, a coupler, and—most critically—three isolators that are part of the transformer. The price was unbeatable, costing less than a latte nowadays, so I brought it home.
 
