@@ -19,15 +19,15 @@ The coupler and wheels were an easy fix, as these parts are readily available, a
 
 ### Designing and Printing the Isolators
 
-Printing the parts was the easy part; designing them took more time. I’m not an expert CAD user and have no formal design training, but I enjoy a challenge. So, I opened TinkerCAD and started working on my design.
+Printing was the easy part; designing the part took more time. I’m not an expert CAD user and have no formal design training, but I enjoy a challenge. So, I opened TinkerCAD and started working on my design.
 
 [TinkerCAD](https://www.tinkercad.com) is basic and easy to learn, and I highly recommend it to any beginner like me. It essentially works by **adding** and **subtracting** basic shapes. For example, if you want to build a pipe, you start with a solid cylinder and subtract a smaller cylinder from its center:
 
 ![](/media/tinkercad.jpg)
 
-By combining multiple shapes, you can create surprisingly complex components. It’s a bit tedious, but entirely doable.
+By combining multiple shapes, you can create surprisingly complex components. It’s a bit tedious on this platform, but entirely doable.
 
-> While surprisingly powerful for a web only tool, more sophisticated users would likely be better off with more advanced platforms.
+> While surprisingly powerful for a web only tool, more sophisticated users would likely be better off with more advanced platforms like TinkerCAD's bigger brother [Autodesk Fusion](https://www.autodesk.com/products/fusion-360/overview).
 
 ### Building the isolator
 
