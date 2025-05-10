@@ -36,7 +36,7 @@ I’m using four main boards:
 
 The VS1053 board has fixed pin assignments, but the relay and CAN boards allow pin remapping—making stacking simple.
 
-![](/media/cbus-feathers.jpg)
+![](/media/CBUS-feathers.jpg)
 
 ### Pin Configuration
 
