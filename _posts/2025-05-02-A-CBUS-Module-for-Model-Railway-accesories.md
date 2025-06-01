@@ -11,7 +11,7 @@ My model railway club ([ETE](https://ete-pnw.org)) is building a few new modules
 
 The bottling section is motorized, with rotating carousels of bottles, and the building includes simple yet effective lighting.
 
-One great feature of successful layouts—especially for younger visitors—is interactivity. Think Miniatur Wunderland style.
+One great feature of successful layouts—especially for younger visitors—is interactivity. Think [Miniatur Wunderland](https://) style.
 
 So, I set out to build a simple module triggered by a few strategically placed buttons. When pressed, they turn on the carousels, activate lights, and play bottling plant sound effects.
 
@@ -82,11 +82,13 @@ In CBUS, systems are made up of *producers* and *consumers* of events. Events or
 
 Accessory control is done with two CBUS commands: *ACON* (activate) and *ACOF* (deactivate), using this format:
 
-| Byte 1 | Bytes 2–3           | Bytes 4–5           |
+| Byte 1 | Bytes 2–3            | Bytes 4–5            |
 |--------|----------------------|----------------------|
-| Opcode | Node Number (Hi/Lo) | Event Number (Hi/Lo) |
+| Opcode | Node Number (Hi/Lo)  | Event Number (Hi/Lo) |
 
-This simple architecture supports complex layouts. A single event can trigger multiple actions.
+The *ACON* and *ACOF* opcodes are standard, with respective values of `0x90` and `0x91`.
+
+This simple architecture can support very complex layouts. A single event can trigger multiple actions on multiple consumers.
 
 In this project, my module will act as a *consumer*. One event triggers the relay, and others trigger different audio clips from the SD card.
 
